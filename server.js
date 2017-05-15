@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').load();
+
 const express = require('express');
 const cors = require('cors');
 const debug = require('debug')('restInsured:server');
