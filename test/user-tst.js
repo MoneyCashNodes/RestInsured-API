@@ -8,15 +8,26 @@ const User = require('../model/user');
 
 mongoose.Promise = Promise;
 
+<<<<<<< HEAD
 require('../server.js');
 
 describe('User Constructor testing', function() {
 
+=======
+require('../server');
+
+
+describe('User Constructor testing', function() {
+>>>>>>> 623888c314ed08b663bc92f29ada4a62e7afcf7b
   describe('when creating a new user', function() {
     this.newUser = new User('exampleUser', 'example@email.com', 'password', 'example-insurance');
 
     it('should create a new user', done => {
+<<<<<<< HEAD
       expect(this.newUser.fullname).to.equal('exampleUser');
+=======
+      expect(this.newUser.fullName).to.equal('exampleUser');
+>>>>>>> 623888c314ed08b663bc92f29ada4a62e7afcf7b
       done();
     });
 
