@@ -38,26 +38,25 @@ describe('User Routes Test', function() {
 
   describe('POST New User Account', function() {
     describe('succesful user POST', function () {
+      after( done => {
+        User.remove({})
+        .then( () => done())
+        .catch(done);
+      });
       //call exampleUser
       it('should provide a 200 status code for a successful user POST', function(done) {
-        expect(res.status).to.be.equal(200);
-        done();
-      });
-      it('should provide email of user', done => {
-        expect(res.body.email).to.be.equal(exampleUser.email);
-        done();
-      });
-      it('should provide password of user', done => {
-        expect(res.body.password).to.be.equal(exampleUser.password);
-        done();
-      })
-      it('should provide insurance of user', done => {
-        expect(res.body.insurance).to.be.equal(exampleUser.insurance);
-        done();
-      });
-      it('should provide full name of user', done => {
-        expect(res.body.fullName).to.be.equal(exampleUser.fullName);
-        done();
+        request.post(`${url}/api/signup`)
+        .send(exampleUser)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.be.equal(200);
+          expect(res.text).to.be.a('string');
+          expect(res.body.email).to.be.equal(exampleUser.email);
+          expect(res.body.password).to.be.equal(exampleUser.password);
+          expect(res.body.insurance).to.be.equal(exampleUser.insurance);
+          expect(res.body.fullName).to.be.equal(exampleUser.fullName);
+          done();
+        })
       })
     });
 
@@ -78,23 +77,26 @@ describe('User Routes Test', function() {
 
   describe('GET Existing User Account', function() {
     //before block with successful POST of exampleUser
-      it('should provide a 200 status code for a successful user GET', done => {
-        //successful GET
-        expect(res.body.fullName).to.be.equal(exampleUser.fullName);
-        expect(res.body.email).to.be.equal(exampleUser.email);
-        expect(res.body.password).to.be.equal(exampleUser.password);
-        expect(res.body.insurance).to.be.equal(exampleUser.insurance);
-        expect(res.status).to.be.equal(200);
-        done();
-      });
-      it('invalid GET request should produce 400', done => {
-        //invalid GET
-        expect(res.status).to.be.equal(400);
-      })
-      it('unauthorized GET request should produce 404', done => {
-        //unauthorized GET
-        expect(res.status).to.be.equal(404);
-      })
+    it('should provide a 200 status code for a successful user GET', done => {
+      //successful GET
+      expect(res.body.fullName).to.be.equal(exampleUser.fullName);
+      expect(res.body.email).to.be.equal(exampleUser.email);
+      expect(res.body.password).to.be.equal(exampleUser.password);
+      expect(res.body.insurance).to.be.equal(exampleUser.insurance);
+      expect(res.status).to.be.equal(200);
+      done();
+    });
+    it('invalid GET request should produce 400', done => {
+      //invalid GET
+      expect(res.status).to.be.equal(400);
+      done();
+    })
+
+    it('unauthorized GET request should produce 404', done => {
+      //unauthorized GET
+      expect(res.status).to.be.equal(404);
+      done();
+    })
   })
 
   describe('DELETE Existing User Account', function() {
@@ -120,9 +122,27 @@ describe('User Routes Test', function() {
   })
 
   describe('PUT Update Existing User Account', function() {
+    //successful POST with example user
     it('should provide a 200 status code for a successful user PUT', done => {
+      //successful PUT
+      expect(res.body.fullName).to.be.equal(exampleUser.fullName);
+      expect(res.body.email).to.be.equal(exampleUser.email);
+      expect(res.body.password).to.be.equal(exampleUser.password);
+      expect(res.body.insurance).to.be.equal(exampleUser.insurance);
+      expect(res.status).to.be.equal(200);
       done();
     });
+
+    it('invalid PUT request should produce 400', done => {
+      //invalid PUT
+      expect(res.status).to.be.equal(400);
+      done();
+    })
+    it('unauthorized PUT request should produce 404', done => {
+      //unauthorized PUT
+      expect(res.status).to.be.equal(404);
+      done();
+    })
   })
 
   after(done => {
