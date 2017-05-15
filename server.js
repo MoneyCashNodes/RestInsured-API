@@ -17,11 +17,12 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/cfgram-dev';
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
-//
-// app.use(errorHandler);
-// app.use(cors());
-// app.use(bodyParser);
-// app.use('/api', docRoutes(router));
-// app.use('/api', userRoutes(router));
+
+app.use(errorHandler);
+app.use(cors());
+app.use(bodyParser);
+app.use('/ext', docRoutes(router));
+app.use('/api', userRoutes(router));
+
 
 app.listen(PORT, () => console.log(`Conneected to port ${PORT}`));

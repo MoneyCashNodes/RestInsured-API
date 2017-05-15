@@ -1,3 +1,4 @@
+
 'use strict'
 
 const debug = require('debug')('restInsured:user-rt');
@@ -32,3 +33,4 @@ module.exports = function(router) {
   })
   return router;
 }
+
