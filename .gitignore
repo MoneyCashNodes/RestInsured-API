@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# mongo database
+db
+
+# used for deployment
+.Proc

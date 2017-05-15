@@ -1,0 +1,24 @@
+{
+  "name": "restinsured-api",
+  "version": "1.0.0",
+  "description": "Finds doctors in your area that accept your insurance",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoneyCashNodes/RestInsured-API.git"
+  },
+  "keywords": [
+    "restinsured",
+    "api"
+  ],
+  "author": "Enrique Rico, Abigail White, Benjamin Ayzenberg, Kayla Asay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MoneyCashNodes/RestInsured-API/issues"
+  },
+  "homepage": "https://github.com/MoneyCashNodes/RestInsured-API#readme"
+}
