@@ -7,11 +7,7 @@ const Promise = require('bluebird');
 const errorHandler = require('./middleware/error');
 const bodyParser = require('body-parser').json();
 const mongoose = require('mongoose');
-<<<<<<< HEAD
-// const docRoutes = require('./routes/doctor-rt');
-=======
 const docRoutes = require('./routes/doctor-rt.js');
->>>>>>> 80a12c697401b8dd55db7476b8f8acee7f35b142
 const userRoutes = require('./routes/user-rt');
 
 const router = express.Router();
@@ -25,12 +21,8 @@ mongoose.connect(MONGODB_URI);
 app.use(bodyParser);
 app.use(errorHandler);
 app.use(cors());
-<<<<<<< HEAD
 app.use(bodyParser);
-// app.use('/ext', docRoutes(router));
-=======
 app.use('/ext', docRoutes(router));
->>>>>>> 80a12c697401b8dd55db7476b8f8acee7f35b142
 app.use('/api', userRoutes(router));
 
-app.listen(PORT, () => console.log(`Conneected to port ${PORT}`));
+app.listen(PORT, () => console.log(`Connected to port ${PORT}`));
