@@ -1,8 +1,8 @@
 # Project Name: Rest Insured
 
 ### Team Name: MoneyCacheNodes
-JS Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg
-iOS Team Members: Brandon Little, Luay Younus, David Porter
+* JavaScript Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg
+* iOS Team Members: Brandon Little, Luay Younus, David Porter
 
 ### Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
@@ -10,21 +10,21 @@ iOS Team Members: Brandon Little, Luay Younus, David Porter
 
 #### MVP
 * Registered user takes in full name, email, location, provider, password info
-* Input of provider info and location
-* User location
-* Range of query
-* Insurance provider name
+  * Input of provider info and location
+  * User location
+  * Range of query
+  * Insurance provider name
 * Output of medical institutions (dental, pharmacy, doctors) that accept insurance.
-* Visualization: interactive pins on a map AND listed information beneath map
+  * Visualization: interactive pins on a map AND listed information beneath map
 * Provided info includes:
-* Doctor
-* Phone number
-* Name
-* Practice
-* Practice name
-* Insurance providers accepted (list)
-* Practice phone number
-* Specialty
+  * Doctor
+  * Phone number
+  * Name
+  * Practice
+  * Practice name
+  * Insurance providers accepted (list)
+  * Practice phone number
+  * Specialty
 * Location
 
 #### Stretch
