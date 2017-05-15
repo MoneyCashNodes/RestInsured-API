@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 'use strict';
+=======
 
-const debug = require('debug')('');
+'use strict'
+>>>>>>> 961fb37ca767aaa2f2627f7591e4499415aa335f
+
+const debug = require('debug')('restInsured:user-rt');
 const User = require('../model/user');
 const basicAuth = require('../middleware/basic-auth');
 
@@ -48,4 +53,9 @@ module.exports = function(router) {
     return User.findOneAndUpdate()
   })
   return router;
+<<<<<<< HEAD
 };
+=======
+}
+
+>>>>>>> 961fb37ca767aaa2f2627f7591e4499415aa335f
