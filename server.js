@@ -7,7 +7,7 @@ const Promise = require('bluebird');
 const errorHandler = require('./middleware/error');
 const bodyParser = require('body-parser').json();
 const mongoose = require('mongoose');
-const docRoutes = require('./routes/doctor-rt');
+// const docRoutes = require('./routes/doctor-rt');
 const userRoutes = require('./routes/user-rt');
 
 const app = express();
@@ -21,7 +21,7 @@ mongoose.connect(MONGODB_URI);
 app.use(errorHandler);
 app.use(cors());
 app.use(bodyParser);
-app.use('/ext', docRoutes(router));
+// app.use('/ext', docRoutes(router));
 app.use('/api', userRoutes(router));
 
 

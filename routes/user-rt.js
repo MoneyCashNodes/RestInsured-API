@@ -1,27 +1,14 @@
-<<<<<<< HEAD
 'use strict';
-=======
-
-'use strict'
->>>>>>> 961fb37ca767aaa2f2627f7591e4499415aa335f
 
 const debug = require('debug')('restInsured:user-rt');
-const User = require('../model/user');
+const userCtlr = require('../controllers/user-ctrl');
 const basicAuth = require('../middleware/basic-auth');
 
 module.exports = function(router) {
   router.post('/signup', (req, res) => {
     debug('#POST /signup');
 
-    let tempPassword = req.body.password;
-    req.body.password = null;
-    delete req.body.password;
-
-    let newUser = new User(req.body);
-
-    return newUser.generatePasswordHash(tempPassword)
-    .then(user => user.save())
-    .then(user => user.generateToken())
+    userCtlr.createUser(req)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
   });
@@ -29,9 +16,7 @@ module.exports = function(router) {
   router.get('/signin', basicAuth, (req, res) => {
     debug('#GET /signin');
 
-    return User.findOne({email: req.auth.email})
-    .then(user => user.comparePasswordHash(req.auth.email))
-    .then(user => user.generateToken())
+    userCtlr.fetchUser(req)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
   });
@@ -39,23 +24,22 @@ module.exports = function(router) {
   router.delete('/deleteaccount', basicAuth, (req, res) => {
     debug('#DELETE /deleteaccount');
 
-    return User.findOne({email: req.auth.email}, function(err, user) {
-      user.remove()
-      .res.status(204)
-      .send('Item deleted')
-      .catch(err => res.status(err.status).send(err));
-    });
+    userCtlr.deleteUser(req)
+    .then( () => {
+      res.status(204);
+    })
+    .send('Item deleted')
+    .catch(err => res.status(err.status).send(err));
   });
 
   router.put('/updateaccount', basicAuth, (req, res) => {
     debug('#PUT /updateaccount');
 
-    return User.findOneAndUpdate()
-  })
+    userCtlr.updateUser(req, {new: true})
+    .then( user => {
+      res.json(user);
+    })
+    .catch(err => res.status(400).send(err.message));
+  });
   return router;
-<<<<<<< HEAD
 };
-=======
-}
-
->>>>>>> 961fb37ca767aaa2f2627f7591e4499415aa335f
