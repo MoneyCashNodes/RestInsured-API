@@ -52,3 +52,65 @@ Team Name: MoneyCacheNodes
   * GitHub Projects for daily TODOs
   * Google Docs for larger overview, daily standups
   * Slack for basic communication
+_____
+### Sample JSON
+{
+  "Providers": [
+    {
+      "Practice" : {
+        "Name" : "Good Doctors",
+        "phone" : "2064324567",
+        "uid" : "1234uiid576851234",
+        "lat" : 47.635867,
+        "long" : -122.281694,
+        "state": "WA",
+        "state_long": "Washington",
+        "street": "821 Saint Helena Hwy S",
+        "zip": "98116",
+        "accepts_new_patients": true,
+        "Doctors" : [
+          {
+            "Doctor Name" : "Adam Scott",
+            "Specialty" : "cardiologist"
+          }
+        ]
+      },
+      "Practice" : {
+        "Name" : "Okay Doctors",
+        "phone" : "4046304231",
+        "uid" : "1234uiid5768674",
+        "lat" : 47.609255,
+        "long" : -122.334566,
+        "state": "WA",
+        "state_long": "Washington",
+        "street": "600 Helena Hwy S",
+        "zip": "98116",
+        "accepts_new_patients": true,
+        "Doctors" : [
+          {
+            "Doctor Name" : "Brandon Luay",
+            "Specialty" : "dermotologist"
+          }
+        ]
+      },
+      "Practice" : {
+        "Name" : "Bad Doctors",
+        "phone" : "2066304231",
+        "uid" : "1234uiid576854048",
+        "lat" : 47.622910,
+        "long" : -122.326841,
+        "state": "WA",
+        "state_long": "Washington",
+        "street": "821 Mount Rainier Hwy S",
+        "zip": "98116",
+        "accepts_new_patients": true,
+        "Doctors" : [
+          {
+            "Doctor Name" : "David Porter",
+            "Specialty" : "proctologist"
+          }
+        ]
+      }
+    }
+  ]
+}
