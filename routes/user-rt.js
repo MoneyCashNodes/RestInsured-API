@@ -1,7 +1,7 @@
 
 'use strict'
 
-const debug = require('debug')('');
+const debug = require('debug')('restInsured:user-rt');
 const User = require('../model/user');
 const basicAuth = require('../middleware/basic-auth');
 
@@ -25,7 +25,7 @@ module.exports = function(router) {
   router.get('/signin', basicAuth, (req, res) => {
     debug('GET /signin')
 
-    return User.findOne({fullname: req.auth.fillname})
+    return User.findOne({fullname: req.auth.fullname})
     .then(user => user.comparePasswordHash(req.auth.fullname))
     .then(user => user.generateToken())
     .then(token => res.json(token))

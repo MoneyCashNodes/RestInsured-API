@@ -2,7 +2,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const debug = require('debug')('cfgram:server');
+const debug = require('debug')('restInsured:server');
 const Promise = require('bluebird');
 const errorHandler = require('./middleware/error');
 const bodyParser = require('body-parser').json();
@@ -23,5 +23,6 @@ app.use(cors());
 app.use(bodyParser);
 app.use('/ext', docRoutes(router));
 app.use('/api', userRoutes(router));
+
 
 app.listen(PORT, () => console.log(`Conneected to port ${PORT}`));
