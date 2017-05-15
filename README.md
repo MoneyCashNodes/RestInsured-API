@@ -1,4 +1,4 @@
-# Project Name: Rest Insured
+![cf](https://i.imgur.com/7v5ASc8.png) Rest Insured
 #### Project Week May 2017
 Team Name: MoneyCacheNodes
 * JavaScript Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg
@@ -8,7 +8,7 @@ Team Name: MoneyCacheNodes
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-#### MVP
+### MVP
 * Registered user takes in full name, email, location, provider, password info
   * Input of provider info and location
   * User location
@@ -27,7 +27,7 @@ Team Name: MoneyCacheNodes
   * Specialty
 * Location
 
-#### Stretch
+### Stretch
 * Filter requests to api by “specialty”
 * Book appointments functionality
 * Calendar notifications of appointment
