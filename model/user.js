@@ -9,3 +9,4 @@ const userSchema = Schema({
   password: {type: String, required: true},
   insurance: {type: String, required: true},
 });
+
