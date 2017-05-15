@@ -45,6 +45,30 @@ describe('BetterDoc route', function(){
           done();
         });
     });
+
+    it('should have a practice property with valid name, specialty, phone number,insurance provider, location', done => {
+      app.get('/doctors')
+      .query(
+        {
+          user_key: process.env.user_key,
+          insurance_uid: insurance,
+          user_location: sampleloc,
+          location: sampleloc,range,
+        })
+        .set({
+          Authorization: `Bearer ${this.temptoken}`,
+        })
+        .end((err,res) =>{
+          if(err) return done(err);
+          expect(res.body.practice.name).to.be.a('String');
+          expect(res.body.practice.phonenumber).to.be.a('String');
+          expect(res.body.practice.insuranceproviderid).to.be.a('String');
+          expect(res.body.practice.specialty).to.be.a('String');
+          expect(res.body.practice.location).to.be.a('String');
+          done();
+        });
+    });
+
   });
 
 });
