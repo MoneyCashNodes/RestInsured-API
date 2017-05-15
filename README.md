@@ -1,6 +1,6 @@
 # Project Name: Rest Insured
-
-### Team Name: MoneyCacheNodes
+#### Project Week May 2017
+Team Name: MoneyCacheNodes
 * JavaScript Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg
 * iOS Team Members: Brandon Little, Luay Younus, David Porter
 
