@@ -62,16 +62,13 @@ describe('User Routes Test', function() {
 
     describe('Unsuccessful POST', function() {
       it('should provide a 400 status code for invalid User POST', done => {
-        //call invalidUser
-        expect(res.status).to.be.equal(400);
+        request.post(`${url}/api/signup`)
+        .send(invalidUser)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.be.equal(400);
         done();
       });
-
-      it('invalid authorization should provide 404 Error', done => {
-        //don't call authorization
-        expect(res.status).to.be.equal(404);
-        done();
-      })
     })
   })
 
