@@ -77,13 +77,44 @@ describe('User Routes Test', function() {
   })
 
   describe('GET Existing User Account', function() {
-    it('should provide a 200 status code for a successful user GET', done => {
-      done();
-    });
+    //before block with successful POST of exampleUser
+      it('should provide a 200 status code for a successful user GET', done => {
+        //successful GET
+        expect(res.body.fullName).to.be.equal(exampleUser.fullName);
+        expect(res.body.email).to.be.equal(exampleUser.email);
+        expect(res.body.password).to.be.equal(exampleUser.password);
+        expect(res.body.insurance).to.be.equal(exampleUser.insurance);
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+      it('invalid GET request should produce 400', done => {
+        //invalid GET
+        expect(res.status).to.be.equal(400);
+      })
+      it('unauthorized GET request should produce 404', done => {
+        //unauthorized GET
+        expect(res.status).to.be.equal(404);
+      })
   })
 
   describe('DELETE Existing User Account', function() {
+    //before block with successful POST of exampleUser
     it('should provide a 204 status code for a successful user DELETE', done => {
+      //successful DELETE render
+      expect(res.status).to.be.equal(204);
+      // ??? actually not sure about this
+      done();
+    });
+
+    it('should provide a 204 status code for a successful user DELETE', done => {
+      //invalid DELETE render
+      expect(res.status).to.be.equal(400);
+      done();
+    });
+
+    it('should provide a 204 status code for a successful user DELETE', done => {
+      //unauthorized DELETE render
+      expect(res.status).to.be.equal(404);
       done();
     });
   })
