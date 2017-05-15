@@ -1,36 +1,45 @@
-
-'use strict'
+'use strict';
 
 const debug = require('debug')('restInsured:user-rt');
-const User = require('../model/user');
+const userCtlr = require('../controllers/user-ctrl');
 const basicAuth = require('../middleware/basic-auth');
 
 module.exports = function(router) {
   router.post('/signup', (req, res) => {
-    debug('POST /signup')
+    debug('#POST /signup');
 
-    let tempPassword = req.body.password;
-    req.body.password = null;
-    delete req.body.password;
-
-    let newUser = new User(req.body);
-
-    return newUser.generatePasswordHash(tempPassword)
-    .then(user => user.save())
-    .then(user => user.generateToken())
+    userCtlr.createUser(req)
     .then(token => res.json(token))
-    .catch(err => res.status(err.status).send(err))
-  })
+    .catch(err => res.status(err.status).send(err));
+  });
 
   router.get('/signin', basicAuth, (req, res) => {
-    debug('GET /signin')
+    debug('#GET /signin');
 
-    return User.findOne({fullname: req.auth.fullname})
-    .then(user => user.comparePasswordHash(req.auth.fullname))
-    .then(user => user.generateToken())
+    userCtlr.fetchUser(req)
     .then(token => res.json(token))
-    .catch(err => res.status(err.status).send(err))
-  })
-  return router;
-}
+    .catch(err => res.status(err.status).send(err));
+  });
 
+  router.delete('/deleteaccount', basicAuth, (req, res) => {
+    debug('#DELETE /deleteaccount');
+
+    userCtlr.deleteUser(req)
+    .then( () => {
+      res.status(204);
+    })
+    .send('Item deleted')
+    .catch(err => res.status(err.status).send(err));
+  });
+
+  router.put('/updateaccount', basicAuth, (req, res) => {
+    debug('#PUT /updateaccount');
+
+    userCtlr.updateUser(req, {new: true})
+    .then( user => {
+      res.json(user);
+    })
+    .catch(err => res.status(400).send(err.message));
+  });
+  return router;
+};
