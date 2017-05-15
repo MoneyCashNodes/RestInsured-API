@@ -2,7 +2,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const debug = require('debug')('cfgram:server');
+const debug = require('debug')('restInsured:server');
 const Promise = require('bluebird');
 const errorHandler = require('./middleware/error');
 const bodyParser = require('body-parser').json();
@@ -17,7 +17,7 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/cfgram-dev';
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
-// 
+//
 // app.use(errorHandler);
 // app.use(cors());
 // app.use(bodyParser);

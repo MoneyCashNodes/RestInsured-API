@@ -21,8 +21,8 @@ describe('User Routes Test', function() {
     before(done => {
       app.server.listen(3000);
       done();
-    })
-  })
+    });
+  });
 
   const exampleUser = {
     fullName: 'exampleuser',
