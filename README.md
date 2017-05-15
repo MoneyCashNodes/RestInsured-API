@@ -1,4 +1,5 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) Rest Insured
+======
 #### Project Week May 2017
 Team Name: MoneyCacheNodes
 * JavaScript Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg

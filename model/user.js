@@ -10,3 +10,9 @@ const userSchema = Schema({
   insurance: {type: String, required: true},
 });
 
+module.exports = function(fullname, email, password, insurance) {
+  this.fullname = fullname;
+  this.email = email;
+  this.password = password;
+  this.insurance = insurance;
+};
