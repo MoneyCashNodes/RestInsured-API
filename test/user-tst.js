@@ -8,12 +8,6 @@ const User = require('../model/user');
 
 mongoose.Promise = Promise;
 
-<<<<<<< HEAD
-require('../server.js');
-
-describe('User Constructor testing', function() {
-
-=======
 require('../server');
 
 

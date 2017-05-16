@@ -6,14 +6,15 @@ const User = require('../model/user');
 
 module.exports = exports = {};
 
-exports.createUser = function(req) {
-  if(!req.body) return Promise.reject(createError(400, 'bad request'));
+exports.createUser = function(req, user) {
 
-  let tempPassword = req.body.password;
-  req.body.password = null;
-  delete req.body.password;
+  if(!user) return Promise.reject(createError(400, 'Bad Request'));
 
-  let newUser = new User(req.body);
+  let tempPassword = user.password;
+  user.password = null;
+  delete user.password;
+
+  let newUser = new User(user);
 
   return newUser.generatePasswordHash(tempPassword)
   .then(user => user.save())
@@ -36,7 +37,7 @@ exports.deleteUser = function(req) {
 };
 
 exports.updateUser = function(req) {
-  // TODO fix this 
+  // TODO fix this
 
   if(!req.auth) return Promise.reject(createError(400, 'bad request'));
   if(!req.body) return Promise.reject(createError(400, 'bad request'));
