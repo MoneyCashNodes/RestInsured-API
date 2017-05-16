@@ -21,11 +21,11 @@ exports.createUser = function(req, user) {
   .then(user => user.generateToken());
 };
 
-exports.fetchUser = function(req) {
-  if(!req.auth) return Promise.reject(createError(400, 'bad request'));
+exports.fetchUser = function(req, auth) {
+  if(!auth) return Promise.reject(createError(400, 'bad request'));
 
-  return User.findOne({email: req.auth.email})
-  .then(user => user.comparePasswordHash(req.auth.email))
+  return User.findOne({email: auth.email})
+  .then(user => user.comparePasswordHash(auth.password))
   .then(user => user.generateToken());
 };
 

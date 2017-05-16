@@ -17,7 +17,7 @@ module.exports = function(router) {
   router.get('/signin', basicAuth, (req, res) => {
     debug('#GET /signin');
 
-    userCtlr.fetchUser(req)
+    userCtlr.fetchUser(req, req.auth)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
   });
@@ -33,8 +33,8 @@ module.exports = function(router) {
     .catch(err => res.status(err.status).send(err));
   });
 
-  router.put('/updateaccount', basicAuth, (req, res) => {
-    debug('#PUT /updateaccount');
+  router.put('/update', basicAuth, (req, res) => {
+    debug('#PUT /update');
 
     userCtlr.updateUser(req, {new: true})
     .then( user => {
