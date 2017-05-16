@@ -3,6 +3,7 @@
 const debug = require('debug')('restInsured:user-rt');
 const userCtlr = require('../controllers/user-ctrl');
 const basicAuth = require('../middleware/basic-auth');
+const bearerAuth = require('../middleware/bearer-auth');
 
 module.exports = function(router) {
 
@@ -22,22 +23,20 @@ module.exports = function(router) {
     .catch(err => res.status(err.status).send(err));
   });
 
-  router.delete('/deleteaccount', basicAuth, (req, res) => {
-    debug('#DELETE /deleteaccount');
+  router.delete('/delete/:id', bearerAuth, (req, res) => {
+    debug('#DELETE /delete');
 
-    userCtlr.deleteUser(req)
-    .then( () => {
-      res.status(204);
-    })
-    .send('Item deleted')
+    userCtlr.deleteUser(req.params.id)
+    .then ( () => res.status(204).send())
     .catch(err => res.status(err.status).send(err));
   });
 
-  router.put('/update', basicAuth, (req, res) => {
+  router.put('/update/:id', bearerAuth, (req, res) => {
     debug('#PUT /update');
 
-    userCtlr.updateUser(req, {new: true})
+    userCtlr.updateUser(req.params.id, req.body)
     .then( user => {
+      console.log(user);
       res.json(user);
     })
     .catch(err => res.status(400).send(err.message));
