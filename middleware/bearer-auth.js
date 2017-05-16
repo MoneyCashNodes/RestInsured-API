@@ -15,7 +15,7 @@ module.exports = function(req, res, next) {
   let token = authHeaders.split('Bearer ')[1];
   if(!token) return next(createError(401, 'Token required'));
 
-  jwt.verify(token, process.env.APP_Secret, (err, decoded) => {
+  jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {
     if(err) return(next(err));
 
     User.find({findHash: decoded.token})

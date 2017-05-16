@@ -9,7 +9,7 @@ module.exports = function(router) {
   router.post('/signup', (req, res) => {
     debug('#POST /signup');
 
-    console.log(req.body);
+    // console.log(req.body);
 
     userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
@@ -35,8 +35,8 @@ module.exports = function(router) {
     .catch(err => res.status(err.status).send(err));
   });
 
-  router.put('/updateaccount', basicAuth, (req, res) => {
-    debug('#PUT /updateaccount');
+  router.put('/update', basicAuth, (req, res) => {
+    debug('#PUT /update');
 
     userCtlr.updateUser(req, {new: true})
     .then( user => {

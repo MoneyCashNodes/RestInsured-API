@@ -25,7 +25,8 @@ exports.fetchUser = function(req, auth) {
   if(!auth) return Promise.reject(createError(400, 'bad request'));
 
   return User.findOne({email: auth.email})
-  .then(user => user.comparePasswordHash(auth.email))
+
+  .then(user => user.comparePasswordHash(auth.password))
   .then(user => user.generateToken());
 };
 
