@@ -29,18 +29,15 @@ exports.fetchUser = function(req, auth) {
   .then(user => user.generateToken());
 };
 
-exports.deleteUser = function(req) {
-  if(!req.auth) return Promise.reject(createError(400, 'bad request'));
+exports.deleteUser = function(id) {
+  if(!id) return Promise.reject(createError(400, 'bad request'));
 
-  return User.findOneAndRemove({email: req.auth.email})
-  .then(user => user.comparePasswordHash(req.auth.email));
+  return User.findByIdAndRemove(id);
 };
 
-exports.updateUser = function(req) {
-  // TODO fix this
+exports.updateUser = function(id, update) {
+  if(!id) return Promise.reject(createError(400, 'bad request'));
+  if(!update) return Promise.reject(createError(400, 'bad request'));
 
-  if(!req.auth) return Promise.reject(createError(400, 'bad request'));
-  if(!req.body) return Promise.reject(createError(400, 'bad request'));
-
-  return User.findOneAndUpdate({email: req.auth.email});
+  return User.findByIdAndUpdate(id, update, {new: true});
 };

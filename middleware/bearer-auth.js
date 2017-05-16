@@ -9,7 +9,7 @@ const User = require('../model/user.js');
 module.exports = function(req, res, next) {
   debug('bearer-auth-middleware');
 
-  let authHeaders = req.headers.Authorization;
+  let authHeaders = req.headers.authorization;
   if (!authHeaders) return createError(401, 'Authroization headers required');
 
   let token = authHeaders.split('Bearer ')[1];
