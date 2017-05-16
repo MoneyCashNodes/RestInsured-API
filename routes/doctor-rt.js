@@ -3,8 +3,8 @@
 const debug = require('debug')('restInsured: doctor-rt');
 // const bearerAuth = require('../middleware/bearer-auth');
 const rp = require('request-promise');
+const doctorCtrl = require('../controllers/doctor-ctrl.js');
 
-// /ext/doctors?location=${req.query.location},${req.query.range}&insurance_uid=${req.query.insurance}&user_key${process.env.user_key}
 
 module.exports = function(router) {
   router.get('/doctors', (req, res) => {
@@ -13,8 +13,9 @@ module.exports = function(router) {
     let reqUrl = `https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=10&user_key=${process.env.user_key}`;
 
     rp(reqUrl)
-    .then(data => res.json(JSON.parse(data)))
-    .catch(err => err);
+    .then(data => doctorCtrl.reduce(JSON.parse(data)))
+    .then(body => res.json(body))
+    .catch(err => res.status(err.status).send(err.message));
   });
   return router;
 };
