@@ -144,7 +144,7 @@ describe('User Routes Test', function() {
       expect(res.status).to.be.equal(404);
       done();
     });
-  })
+  });
 
   describe('PUT Update Existing User Account', function() {
     //successful POST with example user
