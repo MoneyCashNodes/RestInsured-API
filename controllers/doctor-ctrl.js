@@ -6,7 +6,6 @@ module.exports = exports = {};
 
 exports.reduce = function(data) {
   debug('#REDUCE doctor-ctrl');
-  console.dir(data);
   let doctorHouse = [];
 
   data.data.forEach(practice => {

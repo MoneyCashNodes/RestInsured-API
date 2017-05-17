@@ -14,7 +14,10 @@ module.exports = function(router) {
 
     rp(reqUrl)
     .then(data => doctorCtrl.reduce(JSON.parse(data)))
-    .then(body => res.json(body))
+    .then(body => {
+      console.log(body);
+      res.json(body);
+    })
     .catch(err => res.status(err.status).send(err.message));
   });
   return router;
