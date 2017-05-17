@@ -52,11 +52,11 @@ describe('User Routes Test', function() {
         })
         .catch(() => done());
       });
-      after( done => {
-        User.remove({})
-        .then(() => done())
-        .catch(() => done());
-      });
+      // after( done => {
+      //   User.remove({})
+      //   .then(() => done())
+      //   .catch(() => done());
+      // });
       //call exampleUser
       it('should return a new user', done => {
         request.post(`${url}/api/signup`)
@@ -65,8 +65,8 @@ describe('User Routes Test', function() {
         .end((err, res) => {
           console.log(err);
           if (err) return done(err);
-          // expect(res.status).to.be.equal(200);
-          // expect(res.text).to.be.a('string');
+          expect(res.status).to.be.equal(200);
+          expect(res.text).to.be.a('string');
           expect(res.body.fullName).to.equal(exampleUser.fullName);
           expect(res.body.email).to.equal(exampleUser.email);
           expect(res.body.password).to.equal(exampleUser.password);
@@ -106,20 +106,20 @@ describe('User Routes Test', function() {
       })
       .catch(() => done());
     });
-    before(done => {
-      exampleUser.userId = this.tempUser._id.toString();
-      new User(exampleUser).save()
-      .then( user => {
-        this.tempUser = user;
-        done();
-      })
+    // before(done => {
+    //   exampleUser.userId = this.tempUser._id.toString();
+    //   new User(exampleUser).save()
+    //   .then( user => {
+    //     this.tempUser = user;
+    //     done();
+    //   })
+    //   .catch(() => done());
+    // });
+    after((done) => {
+      // delete exampleUser.userId;
+      User.remove({})
+      .then( () => done())
       .catch(() => done());
-    });
-    after(() => {
-      delete exampleUser.userId;
-      // User.remove({})
-      // .then( () => done())
-      // .catch(() => done());
     });
   //
     it('should return a user', done => {
@@ -134,8 +134,8 @@ describe('User Routes Test', function() {
         expect(res.body.password).to.equal(exampleUser.password);
         expect(res.body.insurance).to.equal(exampleUser.insurance);
         expect(res.status).to.equal(200);
+        done();
       });
-      done();
     });
   });
   //     it('invalid GET request should produce 401', done => {
