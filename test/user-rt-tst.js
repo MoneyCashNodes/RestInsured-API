@@ -90,52 +90,45 @@ describe('User Routes Test', function() {
   });
 
 
-  describe('GET Existing User Account', function() {
-    //before block with successful POST of exampleUser
-    before( done => {
-      new User(exampleUser)
-      .generatePasswordHash(exampleUser.password)
-      .then( user => user.save())
-      .then( user => {
-        this.tempUser = user;
-        return user.generateToken();
-      })
-      .then( token => {
-        this.tempToken = token;
-        done();
-      })
-      .catch(() => done());
-    });
-    before(done => {
-      exampleUser.userId = this.tempUser._id.toString();
-      new User(exampleUser).save()
-      .then( user => {
-        this.tempUser = user;
-        done();
-      })
-      .catch(() => done());
-    });
-    after(() => {
-      delete exampleUser.userId;
-      // User.remove({})
-      // .then( () => done())
-      // .catch(() => done());
-    });
-  //
-    it('should return a user', done => {
-      //successful GET
-      request.get(`${url}/api/signin/${this.tempUser._id}`)
-      .set({Authorization: `Bearer ${this.tempToken}`})
-      // .auth('exampleuser', '1234')
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.body.fullName).to.equal(exampleUser.fullName);
-        expect(res.body.email).to.equal(exampleUser.email);
-        expect(res.body.password).to.equal(exampleUser.password);
-        expect(res.body.insurance).to.equal(exampleUser.insurance);
-        expect(res.status).to.equal(200);
+  describe.only('GET: /api/signin', function() {
+    describe('with a valid body', function() {
+      before( done => {
+        let user = new User(exampleUser);
+        user.generatePasswordHash(exampleUser.password)
+        .then( user => user.save())
+        .then( user => {
+          this.tempUser = user;
+          console.log('user', user);
+          done();
+        })
+        .catch(done);
       });
-      done();
+
+
+      it('should return a token', done => {
+        request.get(`${url}/api/signin`)
+        .auth('exampleuser', '1234')
+        .end((err, res) => {
+          if (err) return done(err);
+          console.log('res', res.status);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+
+      after( done => {
+        User.remove({})
+        .then( () => done())
+        .catch(done);
+      });
+      // it('should return a 401 for invalid request', done => {
+      //   request.get(`${url}/api/signin`)
+      //   .auth('exampleuser', '123')
+      //   .end(res => {
+      //     expect(res.status).to.equal(401);
+      //     done();
+      //   });
+      // });
     });
   });
   //     it('invalid GET request should produce 401', done => {
