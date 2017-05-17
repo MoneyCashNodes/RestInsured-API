@@ -7,7 +7,7 @@
     "test": "mocha",
     "start": "node server.js",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "debug": "DEBUG=RestInsured-API* nodemon server",
+    "debug": "DEBUG=RestInsured-API* npm run test",
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "start": "node server.js"
 
