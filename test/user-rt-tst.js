@@ -67,12 +67,8 @@ describe('User Routes Test', function() {
           if (err) return done(err);
           expect(res.status).to.be.equal(200);
           expect(res.text).to.be.a('string');
-          expect(res.body.fullName).to.equal(exampleUser.fullName);
-          expect(res.body.email).to.equal(exampleUser.email);
-          expect(res.body.password).to.equal(exampleUser.password);
-          expect(res.body.insurance).to.equal(exampleUser.insurance);
+          done();
         });
-        done();
       });
     });
 
@@ -83,123 +79,86 @@ describe('User Routes Test', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(400);
+          done();
         });
-        done();
       });
     });
   });
 
 
   describe('GET Existing User Account', function() {
-    //before block with successful POST of exampleUser
-    before( done => {
-      new User(exampleUser)
-      .generatePasswordHash(exampleUser.password)
-      .then( user => user.save())
-      .then( user => {
-        this.tempUser = user;
-        return user.generateToken();
-      })
-      .then( token => {
-        this.tempToken = token;
-        done();
-      })
-      .catch(() => done());
-    });
-    // before(done => {
-    //   exampleUser.userId = this.tempUser._id.toString();
-    //   new User(exampleUser).save()
-    //   .then( user => {
-    //     this.tempUser = user;
-    //     done();
-    //   })
-    //   .catch(() => done());
-    // });
-    after((done) => {
-      // delete exampleUser.userId;
-      User.remove({})
-      .then( () => done())
-      .catch(() => done());
-    });
-  //
-    it('should return a user', done => {
-      //successful GET
-      request.get(`${url}/api/signin/${this.tempUser._id}`)
-      .set({Authorization: `Bearer ${this.tempToken}`})
-      // .auth('exampleuser', '1234')
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.body.fullName).to.equal(exampleUser.fullName);
-        expect(res.body.email).to.equal(exampleUser.email);
-        expect(res.body.password).to.equal(exampleUser.password);
-        expect(res.body.insurance).to.equal(exampleUser.insurance);
-        expect(res.status).to.equal(200);
+    describe('with a valid body', function() {
+      before( done => {
+        new User(exampleUser)
+        .generatePasswordHash(exampleUser.password)
+        .then( user => {
+          console.log('made it');
+          return user.save();
+        })
+        .then( user => {
+          console.log('user', user);
+          this.tempUser = user;
+          return user.generateToken();
+          // done();
+        })
+        .then( token => {
+          this.tempToken = token;
+          done();
+        })
+        .catch(err => {
+          console.log(err)
+          done()
+        });
+      });
+
+      it('should return a token', done => {
+        request.get(`${url}/api/signin`)
+        .auth('exampleuser@test.com', '1234')
+        .end((err, res) => {
+          if (err) return done(err);
+          console.log('res', res.status);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+
+      it('should return a user', done => {
+        console.log(this.tempUser._id, 'here');
+        request.get(`${url}/api/signin/${this.tempUser._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .auth('exampleuser@test.com', '1234')
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.text.fullName).to.equal(exampleUser.fullName);
+          expect(res.text.email).to.equal(exampleUser.email);
+          expect(res.text.password).to.equal(exampleUser.password);
+          expect(res.text.insurance).to.equal(exampleUser.insurance);
+          expect(res.status).to.equal(200);
+        });
         done();
       });
+
+      it('invalid GET: should produce 404', done => {
+        request.get(`${url}/api/signin/${this.tempUser_id}`)
+        .auth('exampleuser@test.com', '123')
+        .end(res => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+
+      it('unauthorized GET: should produce 401', done => {
+        request.get(`${url}/api/signin`)
+        .end(res => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+      // after( done => {
+      //   User.remove({})
+      //   .then( () => done())
+      //   .catch(done);
+      // });
     });
   });
-  //     it('invalid GET request should produce 401', done => {
-  //       //invalid GET
-  //       request.get(`${url}/api/signin`)
-  //       .auth('exampleuser', '123')
-  //       .end(res => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   it('unauthorized GET request should produce 404', done => {
-  //     //unauthorized GET
-  //       expect(res.status).to.equal(404);
-  //       done();
-  //     })
-  //   });
-  //
-  // describe('DELETE Existing User Account', function() {
-  //   //before block with successful POST of exampleUser
-  //   it('should provide a 204 status code for a successful user DELETE', done => {
-  //     //successful DELETE render
-  //     expect(res.status).to.equal(204);
-  //     // ??? actually not sure about this
-  //     done();
-  //   });
-  //
-  //   it('should provide a 204 status code for a successful user DELETE', done => {
-  //     //invalid DELETE render
-  //     expect(res.status).to.equal(400);
-  //     done();
-  //   });
-  //
-  //   it('should provide a 204 status code for a successful user DELETE', done => {
-  //     //unauthorized DELETE render
-  //     expect(res.status).to.equal(404);
-  //     done();
-  //   });
-  // });
-  //
-  // describe('PUT Update Existing User Account', function() {
-  //   //successful POST with example user
-  //   it('should provide a 200 status code for a successful user PUT', done => {
-  //     //successful PUT
-  //     expect(res.body.fullName).to.equal(exampleUser.fullName);
-  //     expect(res.body.email).to.equal(exampleUser.email);
-  //     expect(res.body.password).to.equal(exampleUser.password);
-  //     expect(res.body.insurance).to.equal(exampleUser.insurance);
-  //     expect(res.status).to.equal(200);
-  //     done();
-  //   });
-  //
-  //   it('invalid PUT request should produce 400', done => {
-  //     //invalid PUT
-  //     expect(res.status).to.be.equal(400);
-  //     done();
-  //   })
-  //   it('unauthorized PUT request should produce 404', done => {
-  //     //unauthorized PUT
-  //     expect(res.status).to.be.equal(404);
-  //     done();
-  //   });
-  // });
-
 });
