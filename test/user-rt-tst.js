@@ -21,6 +21,13 @@ const exampleUser = {
   insurance: 'aetna-aetnadmo',
 };
 
+const updateUser = {
+  fullName: 'updateuser',
+  password: '1234',
+  email: 'updateuser@test.com',
+  insurance: 'aetna-aetnadmo',
+};
+
 const invalidUser = {
   fullName: 'exampleuser',
   password: '1234',
@@ -43,7 +50,6 @@ describe('User Routes Test', function() {
         .then(user => user.save())
         .then(user => {
           this.tempUser = user;
-          // console.log('tempUser', this.tempUser);
           return user.generateToken();
         })
         .then(token => {
@@ -57,7 +63,7 @@ describe('User Routes Test', function() {
         .then(() => done())
         .catch(() => done());
       });
-      //call exampleUser
+
       it('should return a new user', done => {
         request.post(`${url}/api/signup`)
         .send(exampleUser)
@@ -90,52 +96,45 @@ describe('User Routes Test', function() {
   });
 
 
-  describe('GET Existing User Account', function() {
-    //before block with successful POST of exampleUser
-    before( done => {
-      new User(exampleUser)
-      .generatePasswordHash(exampleUser.password)
-      .then( user => user.save())
-      .then( user => {
-        this.tempUser = user;
-        return user.generateToken();
-      })
-      .then( token => {
-        this.tempToken = token;
-        done();
-      })
-      .catch(() => done());
-    });
-    before(done => {
-      exampleUser.userId = this.tempUser._id.toString();
-      new User(exampleUser).save()
-      .then( user => {
-        this.tempUser = user;
-        done();
-      })
-      .catch(() => done());
-    });
-    after(() => {
-      delete exampleUser.userId;
-      // User.remove({})
-      // .then( () => done())
-      // .catch(() => done());
-    });
-  //
-    it('should return a user', done => {
-      //successful GET
-      request.get(`${url}/api/signin/${this.tempUser._id}`)
-      .set({Authorization: `Bearer ${this.tempToken}`})
-      // .auth('exampleuser', '1234')
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.body.fullName).to.equal(exampleUser.fullName);
-        expect(res.body.email).to.equal(exampleUser.email);
-        expect(res.body.password).to.equal(exampleUser.password);
-        expect(res.body.insurance).to.equal(exampleUser.insurance);
-        expect(res.status).to.equal(200);
+  describe('GET: /api/signin', function() {
+    describe('with a valid body', function() {
+      before( done => {
+        let user = new User(exampleUser);
+        user.generatePasswordHash(exampleUser.password)
+        .then( user => user.save())
+        .then( user => {
+          this.tempUser = user;
+          console.log('user', user);
+          done();
+        })
+        .catch(done);
       });
-      done();
+
+      it('should return a token', done => {
+        request.get(`${url}/api/signin`)
+        .auth('exampleuser@test.com', '1234')
+        .end((err, res) => {
+          if (err) return done(err);
+          console.log('res', res.status);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+
+      it('should return a 401 for invalid request', done => {
+        request.get(`${url}/api/signin`)
+        .auth('exampleuser@test.com', '123')
+        .end(res => {
+          expect(res.status).to.not.equal(200);
+          done();
+        });
+      });
+
+      after( done => {
+        User.remove({})
+        .then( () => done())
+        .catch(done);
+      });
     });
   });
   //     it('invalid GET request should produce 401', done => {
@@ -156,50 +155,154 @@ describe('User Routes Test', function() {
   //     })
   //   });
   //
-  // describe('DELETE Existing User Account', function() {
-  //   //before block with successful POST of exampleUser
-  //   it('should provide a 204 status code for a successful user DELETE', done => {
-  //     //successful DELETE render
-  //     expect(res.status).to.equal(204);
-  //     // ??? actually not sure about this
-  //     done();
-  //   });
-  //
-  //   it('should provide a 204 status code for a successful user DELETE', done => {
-  //     //invalid DELETE render
-  //     expect(res.status).to.equal(400);
-  //     done();
-  //   });
-  //
-  //   it('should provide a 204 status code for a successful user DELETE', done => {
-  //     //unauthorized DELETE render
-  //     expect(res.status).to.equal(404);
-  //     done();
-  //   });
-  // });
-  //
-  // describe('PUT Update Existing User Account', function() {
-  //   //successful POST with example user
-  //   it('should provide a 200 status code for a successful user PUT', done => {
-  //     //successful PUT
-  //     expect(res.body.fullName).to.equal(exampleUser.fullName);
-  //     expect(res.body.email).to.equal(exampleUser.email);
-  //     expect(res.body.password).to.equal(exampleUser.password);
-  //     expect(res.body.insurance).to.equal(exampleUser.insurance);
-  //     expect(res.status).to.equal(200);
-  //     done();
-  //   });
-  //
-  //   it('invalid PUT request should produce 400', done => {
-  //     //invalid PUT
-  //     expect(res.status).to.be.equal(400);
-  //     done();
-  //   })
-  //   it('unauthorized PUT request should produce 404', done => {
-  //     //unauthorized PUT
-  //     expect(res.status).to.be.equal(404);
-  //     done();
-  //   });
-  // });
+  describe('DELETE Existing User Account', function() {
+    //before block with successful POST of exampleUser
+    before(done => {
+      new User(exampleUser)
+      .generatePasswordHash(exampleUser.password)
+      .then(user => user.save())
+      .then(user => {
+        this.tempUser = user;
+        return user.generateToken();
+      })
+      .then(token => {
+        this.tempToken = token;
+        done();
+      })
+      .catch(() => done());
+    });
+
+    it('should provide a 204 status code for a successful user DELETE', done => {
+      request.delete(`${url}/api/delete/${this.tempUser._id}`)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(204);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.exist;
+        expect(res.body).to.deep.equal({});
+        expect(res.body).to.not.be.a('string');
+        done();
+      });
+    });
+
+    it('should throw an error if given the wrong credentials', done => {
+      request.delete(`${url}/api/delete/${this.tempUser._id}`)
+      .set({
+        Authorization: `Bearer `,
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.statusType).to.equal(4);
+        expect(res.statusCode).to.equal(401);
+        expect(res.error.path).to.deep.equal(`/api/delete/${this.tempUser._id}`);
+        expect(res.error.method).to.deep.equal('DELETE');
+        done();
+      });
+    });
+
+    it('Should return a 404 Error if User ID is invalid', done => {
+      request.delete(`${url}/api/delete/`)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.statusType).to.equal(4);
+        expect(res.statusCode).to.equal(404);
+        expect(res.error.status).to.equal(404);
+        expect(res.error.method).to.deep.equal('DELETE');
+        expect(res.error.path).to.deep.equal('/api/delete/');
+        console.log(res.error);
+        done();
+      });
+    });
+
+  });
+
+  describe('PUT Update Existing User Account', function() {
+    //successful POST with example user
+    before(done => {
+      new User(exampleUser)
+      .generatePasswordHash(exampleUser.password)
+      .then(user => user.save())
+      .then(user => {
+        this.tempUser = user;
+        return user.generateToken();
+      })
+      .then(token => {
+        this.tempToken = token;
+        done();
+      })
+      .catch(() => done());
+    });
+
+    after( done => {
+      User.remove({})
+      .then( () => done())
+      .catch(done);
+    });
+
+    it('should update a user', done => {
+      request.put(`${url}/api/update/${this.tempUser._id}`)
+      .send(updateUser)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.exist;
+        expect(res.body.fullName).to.be.equal('updateuser');
+        expect(res.body.password).to.be.equal('1234');
+        expect(res.body.email).to.be.equal('updateuser@test.com');
+        expect(res.body.insurance).to.be.equal('aetna-aetnadmo');
+        expect(res.body.fullName).to.be.equal(updateUser.fullName);
+        expect(res.body.password).to.be.equal(updateUser.password);
+        expect(res.body.email).to.be.equal(updateUser.email);
+        expect(res.body.insurance).to.be.equal(updateUser.insurance);
+        expect(res.body.fullName).to.be.a('string');
+        expect(res.body.password).to.be.a('string');
+        expect(res.body.email).to.be.a('string');
+        expect(res.body.insurance).to.be.a('string');
+        expect(res.body.fullName).to.be.not.equal(exampleUser.fullName);
+        expect(res.body.password).to.be.equal(exampleUser.password);
+        expect(res.body.email).to.be.not.equal(exampleUser.email);
+        expect(res.body.insurance).to.be.equal(exampleUser.insurance);
+        done();
+      });
+    });
+
+    it('should throw an error if given the wrong credentials', done => {
+      request.put(`${url}/api/update/${this.tempUser._id}`)
+      .set({
+        Authorization: `Bearer `,
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        done();
+      });
+    });
+
+    it('Should return a 404 error if User ID is invalid', done => {
+      request.put(`${url}/api/update/`)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.statusType).to.equal(4);
+        expect(res.statusCode).to.equal(404);
+        expect(res.error.status).to.equal(404);
+        expect(res.error.method).to.deep.equal('PUT');
+        expect(res.error.path).to.deep.equal('/api/update/');
+        done();
+      });
+    });
+  });
+
 
 });
