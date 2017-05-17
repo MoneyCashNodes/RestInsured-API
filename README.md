@@ -1,14 +1,15 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) Rest Insured
 ======
-#### Project Week May 2017
+## Project Week May 2017
 Team Name: MoneyCacheNodes
 * JavaScript Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg
 * iOS Team Members: Brandon Little, Luay Younus, David Porter
 
-### Project Concept:
+## Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
+## Summary
 ### MVP
 * Registered user takes in full name, email, location, provider, password info
   * Input of provider info and location
@@ -34,7 +35,7 @@ Team Name: MoneyCacheNodes
 * Calendar notifications of appointment
 * Unregistered user functionality to access query and map functionality
 
-#### Resources
+### Resources
   * BetterDoctor api
   * Mongo DB
   * Heroku deployment
@@ -48,19 +49,30 @@ Team Name: MoneyCacheNodes
 
 * Developer only: mocha, chai, chai-http
 
-
 #### Collaboration Tools
   * GitHub Projects for daily TODOs
   * Google Docs for larger overview, daily standups
   * Slack for basic communication
 _____
-### Sample JSON
+## API Endpoints
+Deployed endpoint: `rest-insured.herokuapp.com`
+
+### Create and Modify User
+1. Create Account: `rest-insured.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+2. Fetch Account: `rest-insured.herokuapp.com/signin -a <email>:<password>`
+3. Update Account: `rest-insured.herokuapp.com/update/<user id> <key>:<changed value> 'Authorization:Bearer <token>'`
+4. Delete Account: `rest-insured.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
+
+### Doctor and Practice Retrieval
+
+#### Sample JSON
+```
 {
   "Providers": [
     {
       "Practice" : {
         "Name" : "Good Doctors",
-        "phone" : "2064324567",
+        "phone" : "1111111111",
         "uid" : "1234uiid576851234",
         "lat" : 47.635867,
         "long" : -122.281694,
@@ -77,26 +89,8 @@ _____
         ]
       },
       "Practice" : {
-        "Name" : "Okay Doctors",
-        "phone" : "4046304231",
-        "uid" : "1234uiid5768674",
-        "lat" : 47.609255,
-        "long" : -122.334566,
-        "state": "WA",
-        "state_long": "Washington",
-        "street": "600 Helena Hwy S",
-        "zip": "98116",
-        "accepts_new_patients": true,
-        "Doctors" : [
-          {
-            "Doctor Name" : "Brandon Luay",
-            "Specialty" : "dermotologist"
-          }
-        ]
-      },
-      "Practice" : {
         "Name" : "Bad Doctors",
-        "phone" : "2066304231",
+        "phone" : "2222222222",
         "uid" : "1234uiid576854048",
         "lat" : 47.622910,
         "long" : -122.326841,
@@ -107,7 +101,7 @@ _____
         "accepts_new_patients": true,
         "Doctors" : [
           {
-            "Doctor Name" : "David Porter",
+            "Doctor Name" : "Steve Irwin",
             "Specialty" : "proctologist"
           }
         ]
@@ -115,3 +109,11 @@ _____
     }
   ]
 }
+```
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+### Acknowledgments
+
+Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley for guidance and assistance throughout the project.
