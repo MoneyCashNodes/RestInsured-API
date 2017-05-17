@@ -72,7 +72,7 @@ Deployed endpoint: `rest-insured.herokuapp.com`
     {
       "Practice" : {
         "Name" : "Good Doctors",
-        "phone" : "2064324567",
+        "phone" : "1111111111",
         "uid" : "1234uiid576851234",
         "lat" : 47.635867,
         "long" : -122.281694,
@@ -90,7 +90,7 @@ Deployed endpoint: `rest-insured.herokuapp.com`
       },
       "Practice" : {
         "Name" : "Bad Doctors",
-        "phone" : "2066304231",
+        "phone" : "2222222222",
         "uid" : "1234uiid576854048",
         "lat" : 47.622910,
         "long" : -122.326841,
@@ -101,7 +101,7 @@ Deployed endpoint: `rest-insured.herokuapp.com`
         "accepts_new_patients": true,
         "Doctors" : [
           {
-            "Doctor Name" : "David Porter",
+            "Doctor Name" : "Steve Irwin",
             "Specialty" : "proctologist"
           }
         ]

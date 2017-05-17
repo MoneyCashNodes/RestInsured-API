@@ -10,8 +10,6 @@ module.exports = function(router) {
   router.post('/signup', (req, res) => {
     debug('#POST /signup');
 
-    // console.log(req.body);
-
     userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
@@ -30,7 +28,7 @@ module.exports = function(router) {
 
     userCtlr.deleteUser(req.params.id)
     .then ( () => res.status(204).send())
-    .catch(err => res.status(err.status).send(err));
+    .catch(err => res.status(err.status).send(err.message));
   });
 
   router.put('/update/:id', bearerAuth, (req, res) => {
@@ -38,10 +36,9 @@ module.exports = function(router) {
 
     userCtlr.updateUser(req.params.id, req.body)
     .then( user => {
-      console.log(user);
       res.json(user);
     })
-    .catch(err => res.status(400).send(err.message));
+    .catch(err => res.status(err.status).send(err.message));
   });
   return router;
 };
