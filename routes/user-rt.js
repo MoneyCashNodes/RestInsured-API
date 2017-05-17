@@ -10,7 +10,7 @@ module.exports = function(router) {
   router.post('/signup', (req, res) => {
     debug('#POST /signup');
 
-    userCtlr.createUser(req, req.query)
+    userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
   });
@@ -19,7 +19,9 @@ module.exports = function(router) {
     debug('#GET /signin');
 
     userCtlr.fetchUser(req, req.auth)
-    .then(token => res.json(token))
+    .then(token => {
+      res.json(token);
+    })
     .catch(err => res.status(err.status).send(err));
   });
 
@@ -34,10 +36,8 @@ module.exports = function(router) {
   router.put('/update/:id', bearerAuth, (req, res) => {
     debug('#PUT /update');
 
-    userCtlr.updateUser(req.params.id, req.query)
-    .then( user => {
-      res.json(user);
-    })
+    userCtlr.updateUser(req.params.id, req.body)
+    .then( user => res.json(user))
     .catch(err => res.status(err.status).send(err.message));
   });
   return router;

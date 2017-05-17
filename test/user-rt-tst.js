@@ -66,7 +66,7 @@ describe('User Routes Test', function() {
 
       it('should return a new user', done => {
         request.post(`${url}/api/signup`)
-        .query(exampleUser)
+        .send(exampleUser)
         .end((err, res) => {
           console.log(err);
           if (err) return done(err);
@@ -82,6 +82,8 @@ describe('User Routes Test', function() {
           if (err) return done(err);
           console.log(res.status);
           expect(res.status).to.equal(400);
+          expect(res.statusCode).to.equal(400);
+          expect(res.statusType).to.equal(4);
           done();
         });
       });
@@ -117,6 +119,10 @@ describe('User Routes Test', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
+          expect(res.statusCode).to.equal(200);
+          expect(res.statusType).to.equal(2);
+          expect(res.error).to.be.false;
+          expect(res.body).to.be.a('string');
           done();
         });
       });
@@ -136,11 +142,6 @@ describe('User Routes Test', function() {
           expect(res.status).to.equal(401);
           done();
         });
-      });
-      after( done => {
-        User.remove({})
-        .then( () => done())
-        .catch(done);
       });
     });
   });
@@ -236,7 +237,7 @@ describe('User Routes Test', function() {
 
     it('should update a user', done => {
       request.put(`${url}/api/update/${this.tempUser._id}`)
-      .query(updateUser)
+      .send(updateUser)
       .set({
         Authorization: `Bearer ${this.tempToken}`,
       })
