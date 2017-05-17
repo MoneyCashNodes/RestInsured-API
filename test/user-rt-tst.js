@@ -111,7 +111,7 @@ describe('User Routes Test', function() {
         .catch(done);
       });
 
-      it.only('should return a user', done => {
+      it('should return a user', done => {
         request.get(`${url}/api/signin/`)
         .auth('exampleuser@test.com', '1234')
         .end((err, res) => {
