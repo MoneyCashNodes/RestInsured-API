@@ -1,5 +1,3 @@
-// Tests for CRUD
-
 'use strict';
 
 const expect = require('chai').expect;
@@ -76,15 +74,15 @@ describe('User Routes Test', function() {
         });
       });
     });
-      it('should provide a 400 status code for invalid User POST', done => {
-        request.post(`${url}/api/signup`)
-        .end((err, res) => {
-          if (err) return done(err);
-          console.log(res.status);
-          expect(res.status).to.equal(400);
-          done();
-        });
+    it('should provide a 400 status code for invalid User POST', done => {
+      request.post(`${url}/api/signup`)
+      // .auth(invalidUser)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(400);
+        done();
       });
+    });
   });
 
 
@@ -170,9 +168,6 @@ describe('User Routes Test', function() {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(204);
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.exist;
-        expect(res.body).to.deep.equal({});
         expect(res.body).to.not.be.a('string');
         done();
       });
@@ -185,8 +180,6 @@ describe('User Routes Test', function() {
       })
       .end((err, res) => {
         expect(res.status).to.equal(401);
-        expect(res.statusType).to.equal(4);
-        expect(res.statusCode).to.equal(401);
         expect(res.error.path).to.deep.equal(`/api/delete/${this.tempUser._id}`);
         expect(res.error.method).to.deep.equal('DELETE');
         done();
@@ -200,9 +193,6 @@ describe('User Routes Test', function() {
       })
       .end((err, res) => {
         expect(res.status).to.equal(404);
-        expect(res.statusType).to.equal(4);
-        expect(res.statusCode).to.equal(404);
-        expect(res.error.status).to.equal(404);
         expect(res.error.method).to.deep.equal('DELETE');
         expect(res.error.path).to.deep.equal('/api/delete/');
         done();
@@ -243,25 +233,10 @@ describe('User Routes Test', function() {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
-        console.log(res.body);
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.exist;
-        expect(res.body.fullName).to.be.equal('updateuser');
-        expect(res.body.password).to.be.equal('1234');
-        expect(res.body.email).to.be.equal('updateuser@test.com');
-        expect(res.body.insurance).to.be.equal('aetna-aetnadmo');
         expect(res.body.fullName).to.be.equal(updateUser.fullName);
         expect(res.body.password).to.be.equal(updateUser.password);
         expect(res.body.email).to.be.equal(updateUser.email);
         expect(res.body.insurance).to.be.equal(updateUser.insurance);
-        expect(res.body.fullName).to.be.a('string');
-        expect(res.body.password).to.be.a('string');
-        expect(res.body.email).to.be.a('string');
-        expect(res.body.insurance).to.be.a('string');
-        expect(res.body.fullName).to.be.not.equal(exampleUser.fullName);
-        expect(res.body.password).to.be.equal(exampleUser.password);
-        expect(res.body.email).to.be.not.equal(exampleUser.email);
-        expect(res.body.insurance).to.be.equal(exampleUser.insurance);
         done();
       });
     });
@@ -273,9 +248,6 @@ describe('User Routes Test', function() {
       })
       .end((err, res) => {
         expect(res.status).to.equal(401);
-        expect(res.statusType).to.equal(4);
-        expect(res.statusCode).to.equal(401);
-        expect(res.error.status).to.equal(401);
         expect(res.error.method).to.deep.equal('PUT');
         expect(res.error.path).to.deep.equal(`/api/update/${this.tempUser._id}`);
         done();
@@ -289,9 +261,6 @@ describe('User Routes Test', function() {
       })
       .end((err, res) => {
         expect(res.status).to.equal(404);
-        expect(res.statusType).to.equal(4);
-        expect(res.statusCode).to.equal(404);
-        expect(res.error.status).to.equal(404);
         expect(res.error.method).to.deep.equal('PUT');
         expect(res.error.path).to.deep.equal('/api/update/');
         done();
