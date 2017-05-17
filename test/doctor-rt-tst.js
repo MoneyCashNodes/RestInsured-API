@@ -6,7 +6,7 @@ const request = require('superagent');
 const server = require('../server.js');
 
 
-describe.only('BetterDoc route', function() {
+describe('BetterDoc route', function() {
   let app;
   before(done => {
     app = server.listen(8000);
