@@ -29,8 +29,7 @@ const updateUser = {
 };
 
 const invalidUser = {
-  fullName: 'exampleuser',
-  password: '1234',
+  fullName: 'invalideuser',
 };
 
 describe('User Routes Test', function() {
@@ -58,17 +57,16 @@ describe('User Routes Test', function() {
         })
         .catch(() => done());
       });
-      // after( done => {
-      //   User.remove({})
-      //   .then(() => done())
-      //   .catch(() => done());
-      // });
-      //call exampleUser
+
+      after( done => {
+        User.remove({})
+        .then(() => done())
+        .catch(() => done());
+      });
 
       it('should return a new user', done => {
         request.post(`${url}/api/signup`)
         .send(exampleUser)
-        .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           console.log(err);
           if (err) return done(err);
@@ -78,71 +76,49 @@ describe('User Routes Test', function() {
         });
       });
     });
-
-    describe('Unsuccessful POST', function() {
       it('should provide a 400 status code for invalid User POST', done => {
         request.post(`${url}/api/signup`)
-        .send(invalidUser)
         .end((err, res) => {
           if (err) return done(err);
+          console.log(res.status);
           expect(res.status).to.equal(400);
           done();
         });
       });
-    });
   });
 
 
   describe('GET Existing User Account', function() {
     describe('with a valid body', function() {
-      before( done => {
+      before(done => {
         new User(exampleUser)
         .generatePasswordHash(exampleUser.password)
-        .then( user => {
-          console.log('made it');
-          return user.save();
-        })
-        .then( user => {
-          console.log('user', user);
+        .then(user => user.save())
+        .then(user => {
           this.tempUser = user;
           return user.generateToken();
-          // done();
         })
-        .then( token => {
+        .then(token => {
           this.tempToken = token;
           done();
         })
-        .catch(err => {
-          console.log(err)
-          done()
-        });
+        .catch(() => done());
       });
 
-      it('should return a token', done => {
-        request.get(`${url}/api/signin`)
+      after( done => {
+        User.remove({})
+        .then( () => done())
+        .catch(done);
+      });
+
+      it.only('should return a user', done => {
+        request.get(`${url}/api/signin/`)
         .auth('exampleuser@test.com', '1234')
         .end((err, res) => {
           if (err) return done(err);
-          console.log('res', res.status);
           expect(res.status).to.equal(200);
           done();
         });
-      });
-
-      it('should return a user', done => {
-        console.log(this.tempUser._id, 'here');
-        request.get(`${url}/api/signin/${this.tempUser._id}`)
-        .set({Authorization: `Bearer ${this.tempToken}`})
-        .auth('exampleuser@test.com', '1234')
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.text.fullName).to.equal(exampleUser.fullName);
-          expect(res.text.email).to.equal(exampleUser.email);
-          expect(res.text.password).to.equal(exampleUser.password);
-          expect(res.text.insurance).to.equal(exampleUser.insurance);
-          expect(res.status).to.equal(200);
-        });
-        done();
       });
 
       it('invalid GET: should produce 404', done => {
@@ -161,11 +137,11 @@ describe('User Routes Test', function() {
           done();
         });
       });
-      // after( done => {
-      //   User.remove({})
-      //   .then( () => done())
-      //   .catch(done);
-      // });
+      after( done => {
+        User.remove({})
+        .then( () => done())
+        .catch(done);
+      });
     });
   });
 
@@ -229,7 +205,6 @@ describe('User Routes Test', function() {
         expect(res.error.status).to.equal(404);
         expect(res.error.method).to.deep.equal('DELETE');
         expect(res.error.path).to.deep.equal('/api/delete/');
-        console.log(res.error);
         done();
       });
     });
@@ -268,6 +243,7 @@ describe('User Routes Test', function() {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
+        console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body).to.exist;
         expect(res.body.fullName).to.be.equal('updateuser');
@@ -297,6 +273,11 @@ describe('User Routes Test', function() {
       })
       .end((err, res) => {
         expect(res.status).to.equal(401);
+        expect(res.statusType).to.equal(4);
+        expect(res.statusCode).to.equal(401);
+        expect(res.error.status).to.equal(401);
+        expect(res.error.method).to.deep.equal('PUT');
+        expect(res.error.path).to.deep.equal(`/api/update/${this.tempUser._id}`);
         done();
       });
     });
