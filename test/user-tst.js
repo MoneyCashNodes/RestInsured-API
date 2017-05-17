@@ -11,6 +11,7 @@
 // require('../server');
 //
 //
+//should
 // describe('User Constructor testing', function() {
 //   describe('when creating a new user', function() {
 //     this.newUser = new User('exampleUser', 'example@email.com', 'password', 'example-insurance');
