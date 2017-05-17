@@ -66,7 +66,7 @@ describe('User Routes Test', function() {
 
       it('should return a new user', done => {
         request.post(`${url}/api/signup`)
-        .send(exampleUser)
+        .query(exampleUser)
         .end((err, res) => {
           console.log(err);
           if (err) return done(err);
@@ -236,7 +236,7 @@ describe('User Routes Test', function() {
 
     it('should update a user', done => {
       request.put(`${url}/api/update/${this.tempUser._id}`)
-      .send(updateUser)
+      .query(updateUser)
       .set({
         Authorization: `Bearer ${this.tempToken}`,
       })
