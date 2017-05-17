@@ -10,7 +10,7 @@ module.exports = function(router) {
   router.post('/signup', (req, res) => {
     debug('#POST /signup');
 
-    userCtlr.createUser(req, req.body)
+    userCtlr.createUser(req, req.query)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
   });
@@ -34,7 +34,7 @@ module.exports = function(router) {
   router.put('/update/:id', bearerAuth, (req, res) => {
     debug('#PUT /update');
 
-    userCtlr.updateUser(req.params.id, req.body)
+    userCtlr.updateUser(req.params.id, req.query)
     .then( user => {
       res.json(user);
     })
