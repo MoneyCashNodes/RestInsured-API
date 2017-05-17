@@ -18,7 +18,8 @@ exports.createUser = function(req, user) {
 
   return newUser.generatePasswordHash(tempPassword)
   .then(user => user.save())
-  .then(user => user.generateToken());
+  .then(user => user.generateToken())
+  .catch(err => createError(400, err.message));
 };
 
 exports.fetchUser = function(req, auth) {

@@ -1,3 +1,4 @@
+
 'use strict';
 
 const expect = require('chai').expect;
@@ -77,3 +78,4 @@ describe.only('BetterDoc route', function() {
   //   });
   // });
 });
+

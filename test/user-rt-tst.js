@@ -58,11 +58,12 @@ describe('User Routes Test', function() {
         })
         .catch(() => done());
       });
-      after( done => {
-        User.remove({})
-        .then(() => done())
-        .catch(() => done());
-      });
+      // after( done => {
+      //   User.remove({})
+      //   .then(() => done())
+      //   .catch(() => done());
+      // });
+      //call exampleUser
 
       it('should return a new user', done => {
         request.post(`${url}/api/signup`)
@@ -71,14 +72,10 @@ describe('User Routes Test', function() {
         .end((err, res) => {
           console.log(err);
           if (err) return done(err);
-          // expect(res.status).to.be.equal(200);
-          // expect(res.text).to.be.a('string');
-          expect(res.body.fullName).to.equal(exampleUser.fullName);
-          expect(res.body.email).to.equal(exampleUser.email);
-          expect(res.body.password).to.equal(exampleUser.password);
-          expect(res.body.insurance).to.equal(exampleUser.insurance);
+          expect(res.status).to.be.equal(200);
+          expect(res.text).to.be.a('string');
+          done();
         });
-        done();
       });
     });
 
@@ -89,25 +86,36 @@ describe('User Routes Test', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(400);
+          done();
         });
-        done();
       });
     });
   });
 
 
-  describe('GET: /api/signin', function() {
+  describe('GET Existing User Account', function() {
     describe('with a valid body', function() {
       before( done => {
-        let user = new User(exampleUser);
-        user.generatePasswordHash(exampleUser.password)
-        .then( user => user.save())
+        new User(exampleUser)
+        .generatePasswordHash(exampleUser.password)
         .then( user => {
-          this.tempUser = user;
+          console.log('made it');
+          return user.save();
+        })
+        .then( user => {
           console.log('user', user);
+          this.tempUser = user;
+          return user.generateToken();
+          // done();
+        })
+        .then( token => {
+          this.tempToken = token;
           done();
         })
-        .catch(done);
+        .catch(err => {
+          console.log(err)
+          done()
+        });
       });
 
       it('should return a token', done => {
@@ -121,40 +129,46 @@ describe('User Routes Test', function() {
         });
       });
 
-      it('should return a 401 for invalid request', done => {
-        request.get(`${url}/api/signin`)
+      it('should return a user', done => {
+        console.log(this.tempUser._id, 'here');
+        request.get(`${url}/api/signin/${this.tempUser._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .auth('exampleuser@test.com', '1234')
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.text.fullName).to.equal(exampleUser.fullName);
+          expect(res.text.email).to.equal(exampleUser.email);
+          expect(res.text.password).to.equal(exampleUser.password);
+          expect(res.text.insurance).to.equal(exampleUser.insurance);
+          expect(res.status).to.equal(200);
+        });
+        done();
+      });
+
+      it('invalid GET: should produce 404', done => {
+        request.get(`${url}/api/signin/${this.tempUser_id}`)
         .auth('exampleuser@test.com', '123')
         .end(res => {
-          expect(res.status).to.not.equal(200);
+          expect(res.status).to.equal(404);
           done();
         });
       });
 
-      after( done => {
-        User.remove({})
-        .then( () => done())
-        .catch(done);
+      it('unauthorized GET: should produce 401', done => {
+        request.get(`${url}/api/signin`)
+        .end(res => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
+      // after( done => {
+      //   User.remove({})
+      //   .then( () => done())
+      //   .catch(done);
+      // });
     });
   });
-  //     it('invalid GET request should produce 401', done => {
-  //       //invalid GET
-  //       request.get(`${url}/api/signin`)
-  //       .auth('exampleuser', '123')
-  //       .end(res => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   it('unauthorized GET request should produce 404', done => {
-  //     //unauthorized GET
-  //       expect(res.status).to.equal(404);
-  //       done();
-  //     })
-  //   });
-  //
+
   describe('DELETE Existing User Account', function() {
     //before block with successful POST of exampleUser
     before(done => {
