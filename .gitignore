@@ -62,3 +62,7 @@ db
 
 # used for deployment
 .Proc
+
+# coveralls
+
+.coveralls.yml
