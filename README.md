@@ -1,6 +1,8 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) Rest Insured
 
 [![Coverage Status](https://coveralls.io/repos/github/MoneyCashNodes/RestInsured-API/badge.svg?branch=master)](https://coveralls.io/github/MoneyCashNodes/RestInsured-API?branch=master)
+[![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
+
 ======
 ## Project Week May 2017
 Team Name: MoneyCacheNodes
