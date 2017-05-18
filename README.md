@@ -4,16 +4,16 @@
 [![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
 
 Team Name: MoneyCacheNodes
+
 Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](https://github.com/MoneyCashNodes/RestInsured/blob/master/Rest%20Insured/ReadmeAssets/BrandonLittleSmall.jpeg)](https://github.com/abswhite) | [![Ben Ayzenberg](https://github.com/MoneyCashNodes/RestInsured/blob/master/Rest%20Insured/ReadmeAssets/LuayYounusSmall.jpeg)](https://github.com/luayyounus) | [![Enrique Rico](https://github.com/MoneyCashNodes/RestInsured/blob/master/Rest%20Insured/ReadmeAssets/DavidPorterSmall.jpeg)](https://github.com/EnriqueRico)
-[![Kayla Asay ](https://github.com/MoneyCashNodes/RestInsured/blob/master/Rest%20Insured/ReadmeAssets/DavidPorterSmall.jpeg)](https://github.com/thegrimheep)
+[![Abigail White](image)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/luayyounus) | [![Enrique Rico](image)](https://github.com/EnriqueRico)[![Kayla Asay ](image)](https://github.com/thegrimheep)
 
 ## Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-Educational purposes only. This project does not intend to maintain user medical records with respect to Health Care needs or preferences. This app does not persist records of previous health care appointments or illness.
+This app is intended for educational purposes only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
 ## Summary
 ### MVP
@@ -64,22 +64,25 @@ Educational purposes only. This project does not intend to maintain user medical
   * Slack for basic communication
 _____
 ## API Endpoints
-Deployed endpoint: `rest-insured.herokuapp.com`
+Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 
 ### Create and Modify User
-1. Create Account: `rest-insured.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
-2. Fetch Account: `rest-insured.herokuapp.com/signin -a <email>:<password>`
-3. Update Account: `rest-insured.herokuapp.com/update/<user id> <key>:<changed value> 'Authorization:Bearer <token>'`
-4. Delete Account: `rest-insured.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
+1. Create Account: `https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+2. Fetch Account: `https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+3. Update Account: `https://rest-insured-production.herokuapp.com/update/<user id> <key>:<changed value> 'Authorization:Bearer <token>'`
+4. Delete Account: `https://rest-insured-production.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
 Utilize `http://api.betterdoctor.com` as basis for request endpoints.
-  * Further documentation to [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
+Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
 
 1. Fetch provider information based on Location and Insurance Provider input.
 
+API URL Request:
+`https://api.betterdoctor.com/${date}/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}`
 
 #### Sample JSON
+Example of data output from API request
 ```
 {
   "Providers": [
