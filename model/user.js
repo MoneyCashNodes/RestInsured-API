@@ -59,7 +59,6 @@ userSchema.methods.generateFindHash = function() {
         _generateFindHash();
       });
     };
-
     _generateFindHash();
   });
 };

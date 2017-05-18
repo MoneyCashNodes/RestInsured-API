@@ -191,7 +191,6 @@ describe('DELETE Existing User Account', function() {
       done();
     });
   });
-
 });
 
 describe('PUT Update Existing User Account', function() {
