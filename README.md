@@ -48,7 +48,7 @@ This app is intended for educational purposes only. This project does not mainta
 * Unregistered user functionality to access query and map functionality
 
 ### Resources
-* BetterDoctor API: Retrieve insurance information
+* [BetterDoctor API](https://developer.betterdoctor.com/): Retrieve insurance information
 * Mongo DataBase: Maintain user registration data
 * Heroku deployment (Staging and Production Environments)
 * Express: Middleware
@@ -79,7 +79,6 @@ Note: Application requests will be unsuccessful without essential environment va
 ### Install Node Packages
 1. First, `npm i` to download all resources onto the local machine.
 2. In terminal, run files using `nodemon server`.
-3. In a separate terminal tab, enter the following:
 
 ### Create and Modify User
 Enter into terminal window:
