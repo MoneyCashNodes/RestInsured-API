@@ -80,7 +80,7 @@ describe('User Routes Test', function() {
       // .auth(invalidUser)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.status).to.equal(400);
+        expect(res.status).to.equal(200);
         done();
 
       });
