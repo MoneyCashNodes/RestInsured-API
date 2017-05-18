@@ -49,17 +49,17 @@ This app is intended for educational purposes only. This project does not mainta
 
 ### Resources
 * [BetterDoctor API](https://developer.betterdoctor.com/): Retrieve insurance information
-* Mongo DataBase: Maintain user registration data
-* Heroku deployment (Staging and Production Environments)
-* Express: Middleware
-* Mongoose: Manage asynchronous environment
-* JSON web token
-* Bluebird: Promise rendering
-* Body parser: Middleware development
-* Debug: Debugging code process
-* Cors: Provides Express middleware
-* Error Handler: Create error status
-* Multer: Handle middleware form data
+* [Mongo DataBase](https://www.mongodb.com/): Maintain user registration data
+* [Heroku](https://www.heroku.com): Deployment (Staging and Production Environments)
+* [Express](https://expressjs.com/): Middleware
+* [Mongoose](http://mongoosejs.com/): Manage asynchronous environment
+* [JSON Web Token](https://jwt.io/introduction/): Secure data transmission
+* [Bluebird](https://www.npmjs.com/package/bluebird): Promise rendering
+* [Body parser](https://www.npmjs.com/package/body-parser-json): Middleware development
+* [Debug](https://www.npmjs.com/package/debug): Debugging code process
+* [Cors](https://www.npmjs.com/package/cors): Provides Express middleware
+* [Error Handler](https://www.npmjs.com/package/error-handler): Create error status
+* [Multer](https://www.npmjs.com/package/multer): Handle middleware form data
 
 * Developer only:
   * Mocha: Testing
