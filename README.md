@@ -7,7 +7,7 @@ Team Name: MoneyCacheNodes
 
 Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](image)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](image)](https://github.com/EnriqueRico)|[![Kayla Asay ](image)](https://github.com/thegrimheep)
+[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/thegrimheep)
 
 ## Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
@@ -48,25 +48,28 @@ This app is intended for educational purposes only. This project does not mainta
 * Unregistered user functionality to access query and map functionality
 
 ### Resources
-* BetterDoctor API: Retrieve insurance information
-* Mongo DataBase: Maintain user registration data
-* Heroku deployment (Staging and Production Environments)
-* Express: Middleware
-* Mongoose: Manage asynchronous environment
-* JSON web token
-* Bluebird: Promise rendering
-* Body parser: Middleware development
-* Debug: Debugging code process
-* Cors: Provides Express middleware
-* Error Handler: Create error status
-* Multer: Handle middleware form data
+* [BetterDoctor API](https://developer.betterdoctor.com/): Retrieve insurance information
+* [Mongo DataBase](https://www.mongodb.com/): Maintain user registration data
+* [Heroku](https://www.heroku.com): Deployment (Staging and Production Environments)
+* [Express](https://expressjs.com/): Middleware functionality
+* [Mongoose](http://mongoosejs.com/): Manage asynchronous environment
+* [JSON Web Token](https://jwt.io/introduction/): Secure data transmission
+* [Bluebird](https://www.npmjs.com/package/bluebird): Promise rendering
+* [Body parser](https://www.npmjs.com/package/body-parser-json): Middleware development
+* [Debug](https://www.npmjs.com/package/debug): Debugging code process
+* [Cors](https://www.npmjs.com/package/cors): Provides Express middleware
+* [Error Handler](https://www.npmjs.com/package/error-handler): Create error status
+* [Multer](https://www.npmjs.com/package/multer): Handle middleware form data
+* [Bcrypt](https://www.npmjs.com/package/bcrypt): Utilized in password hashing processes
+* [Request](https://www.npmjs.com/package/request): Utilized in making http calls
+* [Request-Promise](https://www.npmjs.com/package/request-promise): Utilize Request and Bluebird in making http calls
 
 * Developer only:
-  * Mocha: Testing
-  * Chai: Testing assertions
-  * Chai-http: Testing with local server environment
+  * [Mocha](https://www.npmjs.com/package/mocha): Testing
+  * [Chai](https://www.npmjs.com/package/chai): Testing assertions
+  * [Chai-http](http://chaijs.com/): Testing with local server environment
 
-#### Team Collaboration Tools
+### Team Collaboration Tools
   * GitHub Projects/ Organization
   * Google Docs for larger overview, daily stand-ups
   * Slack for basic communication
@@ -74,15 +77,26 @@ _____
 ## API Endpoints
 Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 
+Note: Application requests will be unsuccessful without essential environment variables.
+
+### Install Node Packages
+1. First, `npm i` to download all resources onto the local machine.
+2. In terminal, run files using `nodemon server`.
+
 ### Create and Modify User
+Enter into terminal window:
 1. Create Account:
-  * `https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+  * Template: `http POST https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+  * Example: `http POST https://rest-insured-production.herokuapp.com/api/signin fullName=abigail email=abs@white.com password=1234 insurance=aetna`
 2. Fetch Account:
-  * `https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+  * Template: `http GET https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+  * Example: `http GET https://rest-insured-production.herokuapp.com/api/signin -a abswhite:1234`
 3. Update Account:
-  * `https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
+  * Template: `http PUT https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
+  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
 4. Delete Account:  
-  * `https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
+  * Template: `http DELETE https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
+  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
