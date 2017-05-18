@@ -25,10 +25,7 @@ exports.reduce = function(data) {
         specialty: practice.specialties[0].name,
       },
     };
-
     doctorHouse.push(medicalPractice);
-
   });
-
   return doctorHouse;
 };
