@@ -73,16 +73,14 @@ describe('User Routes Test', function() {
           done();
         });
       });
-    });
 
-    it('should provide a 400 status code for invalid User POST', done => {
-      request.post(`${url}/api/signup`)
-      // .auth(invalidUser)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).to.equal(400);
-        done();
-
+      it('should provide a 400: for invalid User POST', done => {
+        request.post(`${url}/api/signup`)
+        .send(invalidUser)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
       });
     });
   });

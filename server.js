@@ -24,7 +24,7 @@ app.use(bodyParser);
 app.use(errorHandler);
 app.use(cors());
 app.use(bodyParser);
-app.use('/ext', docRoutes(router));
+// app.use('/ext', docRoutes(router));
 app.use('/api', userRoutes(router));
 
 app.listen(PORT, () => console.log(`Connected to port ${PORT}`));
