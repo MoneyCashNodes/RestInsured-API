@@ -40,45 +40,43 @@ describe('User Routes Test', function() {
   });
 
   describe('POST /api/signup', function() {
-    describe('succesful user POST', function () {
-      before(done => {
-        new User(exampleUser)
-        .generatePasswordHash(exampleUser.password)
-        .then(user => user.save())
-        .then(user => {
-          this.tempUser = user;
-          return user.generateToken();
-        })
-        .then(token => {
-          this.tempToken = token;
-          done();
-        })
-        .catch(() => done());
-      });
+    before(done => {
+      new User(exampleUser)
+      .generatePasswordHash(exampleUser.password)
+      .then(user => user.save())
+      .then(user => {
+        this.tempUser = user;
+        return user.generateToken();
+      })
+      .then(token => {
+        this.tempToken = token;
+        done();
+      })
+      .catch(() => done());
+    });
 
-      after( done => {
-        User.remove({})
-        .then(() => done())
-        .catch(() => done());
-      });
+    after( done => {
+      User.remove({})
+      .then(() => done())
+      .catch(() => done());
+    });
 
-      it('should return a new user', done => {
-        request.post(`${url}/api/signup`)
-        .send(exampleUser)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.status).to.be.equal(200);
-          expect(res.text).to.be.a('string');
-          done();
-        });
+    it('should return a new user', done => {
+      request.post(`${url}/api/signup`)
+      .send(exampleUser)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.be.equal(200);
+        expect(res.text).to.be.a('string');
+        done();
       });
-      it('should provide a 400: for invalid User POST', done => {
-        request.post(`${url}/api/signup`)
-        .send(invalidUser)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          done();
-        });
+    });
+    it('should provide a 400: for invalid User POST', done => {
+      request.post(`${url}/api/signup`)
+      .send(invalidUser)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        done();
       });
     });
   });
@@ -116,22 +114,22 @@ describe('User Routes Test', function() {
         done();
       });
     });
-  });
 
-  it('invalid GET: should produce 404', done => {
-    request.get(`${url}/api/signin/${this.tempUser_id}`)
-    .auth('exampleuser@test.com', '123')
-    .end(res => {
-      expect(res.status).to.equal(404);
-      done();
+    it('invalid GET: should produce 404', done => {
+      request.get(`${url}/api/signin/${this.tempUser_id}`)
+      .auth('exampleuser@test.com', '123')
+      .end(res => {
+        expect(res.status).to.equal(404);
+        done();
+      });
     });
-  });
 
-  it('unauthorized GET: should produce 401', done => {
-    request.get(`${url}/api/signin`)
-    .end(res => {
-      expect(res.status).to.equal(401);
-      done();
+    it('unauthorized GET: should produce 401', done => {
+      request.get(`${url}/api/signin`)
+      .end(res => {
+        expect(res.status).to.equal(401);
+        done();
+      });
     });
   });
 });
