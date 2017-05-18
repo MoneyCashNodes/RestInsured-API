@@ -62,9 +62,9 @@ This app is intended for educational purposes only. This project does not mainta
 * [Multer](https://www.npmjs.com/package/multer): Handle middleware form data
 
 * Developer only:
-  * Mocha: Testing
-  * Chai: Testing assertions
-  * Chai-http: Testing with local server environment
+  * [Mocha](https://www.npmjs.com/package/mocha): Testing
+  * [Chai](https://www.npmjs.com/package/chai): Testing assertions
+  * [Chai-http](http://chaijs.com/): Testing with local server environment
 
 ### Team Collaboration Tools
   * GitHub Projects/ Organization
