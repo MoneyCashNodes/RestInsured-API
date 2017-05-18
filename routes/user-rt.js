@@ -12,7 +12,7 @@ module.exports = function(router) {
     debug('#POST /signup');
     userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
-    .catch(err => createError(400, err.message));
+    .catch(err => createError(400, 'POST bad request'));
   });
 
   router.get('/signin', basicAuth, (req, res) => {
@@ -20,7 +20,7 @@ module.exports = function(router) {
 
     userCtlr.fetchUser(req, req.auth)
     .then(token => res.json(token))
-    .catch(err => res.status(err.status).send(err));
+    .catch(err => res.status(err.status).send('GET bad request'));
   });
 
   router.delete('/delete/:id', bearerAuth, (req, res) => {
@@ -28,7 +28,7 @@ module.exports = function(router) {
 
     userCtlr.deleteUser(req.params.id)
     .then ( () => res.status(204).send())
-    .catch(err => res.status(err.status).send(err));
+    .catch(err => res.status(err.status).send('DELETE bad request'));
   });
 
   router.put('/update/:id', bearerAuth, (req, res) => {
@@ -36,7 +36,7 @@ module.exports = function(router) {
 
     userCtlr.updateUser(req.params.id, req.body)
     .then( user => res.json(user))
-    .catch(err => res.status(err.status).send(err));
+    .catch(err => res.status(err.status).send('PUT bad request'));
   });
   return router;
 };
