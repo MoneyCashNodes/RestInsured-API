@@ -6,7 +6,6 @@ const express = require('express');
 const cors = require('cors');
 const debug = require('debug')('restInsured:server');
 const Promise = require('bluebird');
-const errorHandler = require('./middleware/error');
 const bodyParser = require('body-parser').json();
 const mongoose = require('mongoose');
 const docRoutes = require('./routes/doctor-rt.js');
@@ -21,7 +20,6 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
 app.use(bodyParser);
-app.use(errorHandler);
 app.use(cors());
 app.use(bodyParser);
 app.use('/ext', docRoutes(router));
