@@ -92,7 +92,7 @@ Enter into terminal window:
   * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
 4. Delete Account:  
   * Template: `http DELETE https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
-  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857`
+  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
