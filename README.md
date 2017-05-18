@@ -7,7 +7,7 @@ Team Name: MoneyCacheNodes
 
 Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](image)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/luayyounus) | [![Enrique Rico](image)](https://github.com/EnriqueRico)[![Kayla Asay ](image)](https://github.com/thegrimheep)
+[![Abigail White](image)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](image)](https://github.com/EnriqueRico)|[![Kayla Asay ](image)](https://github.com/thegrimheep)
 
 ## Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
@@ -15,10 +15,16 @@ Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
 
 This app is intended for educational purposes only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
+## Structure
+* This app was structured using MVC (Model-View-Controller) architecture.
+* This project is deployed on Heroku using staging and production environments.
+* The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
+
 ## Summary
 ### MVP
 * Registered user takes in full name, email, location, provider, password info
-  * Input of provider info and location
+  * Password hashed so the password is never stored in plain text
+* Input of provider info and location
   * User location
   * Range of query
   * Insurance provider name
@@ -44,14 +50,16 @@ This app is intended for educational purposes only. This project does not mainta
 ### Resources
   * BetterDoctor API: Retrieve insurance information
   * Mongo DataBase: Maintain user registration data
-  * Heroku deployment
-  * Express: Node.js Web Apps
+  * Heroku deployment (Staging and Production Environments)
+  * Express: Middleware
   * Mongoose: Manage asynchronous environment
   * JSON web token
   * Bluebird: Promise rendering
   * Body parser: Middleware development
   * Debug: Debugging code process
   * Cors: Provides Express middleware
+  * Error Handler: Create error status
+  * Multer: Handle middleware form data
 
   * Developer only:
       * Mocha: Testing
@@ -73,15 +81,16 @@ Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 4. Delete Account: `https://rest-insured-production.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
-Utilize `http://api.betterdoctor.com` as basis for request endpoints.
-Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
+* Utilize `http://api.betterdoctor.com` as basis for request endpoints.
 
-1. Fetch provider information based on Location and Insurance Provider input.
+* Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
+
+Fetch provider information based on Location and Insurance Provider input.
 
 API URL Request:
 `https://api.betterdoctor.com/${date}/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}`
 
-#### Sample JSON
+#### Sample JSON Data Output
 Example of data output from API request
 ```
 {
@@ -115,4 +124,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Acknowledgments
 
-Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley for guidance and assistance throughout the project.
+Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley, and Erica Winberry for guidance and assistance throughout the project.

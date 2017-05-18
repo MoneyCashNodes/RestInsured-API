@@ -40,7 +40,6 @@ describe('User Routes Test', function() {
   });
 
   describe('POST /api/signup', function() {
-    describe('succesful user POST', function () {
       before(done => {
         new User(exampleUser)
         .generatePasswordHash(exampleUser.password)
@@ -80,7 +79,6 @@ describe('User Routes Test', function() {
           done();
         });
       });
-    });
   });
 
 
@@ -116,22 +114,22 @@ describe('User Routes Test', function() {
         done();
       });
     });
-  });
 
-  it('invalid GET: should produce 404', done => {
-    request.get(`${url}/api/signin/${this.tempUser_id}`)
-    .auth('exampleuser@test.com', '123')
-    .end(res => {
-      expect(res.status).to.equal(404);
-      done();
+    it('invalid GET: should produce 404', done => {
+      request.get(`${url}/api/signin/${this.tempUser_id}`)
+      .auth('exampleuser@test.com', '123')
+      .end(res => {
+        expect(res.status).to.equal(404);
+        done();
+      });
     });
-  });
 
-  it('unauthorized GET: should produce 401', done => {
-    request.get(`${url}/api/signin`)
-    .end(res => {
-      expect(res.status).to.equal(401);
-      done();
+    it('unauthorized GET: should produce 401', done => {
+      request.get(`${url}/api/signin`)
+      .end(res => {
+        expect(res.status).to.equal(401);
+        done();
+      });
     });
   });
 });

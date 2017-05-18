@@ -7,8 +7,7 @@ const User = require('../model/user');
 module.exports = exports = {};
 
 exports.createUser = function(req, user) {
-console.log('in createUser', user)
-  if(!user.email) Promise.reject(createError(400, 'Bad Request'));
+  if(!user) Promise.reject(createError(400, 'POST bad Request'));
 
   let tempPassword = user.password;
   user.password = null;
@@ -19,11 +18,11 @@ console.log('in createUser', user)
   return newUser.generatePasswordHash(tempPassword)
   .then(user => user.save())
   .then(user => user.generateToken())
-  .catch(err => createError(400, err.message));
+  .catch(err => createError(400, 'POST bad request'));
 };
 
 exports.fetchUser = function(req, auth) {
-  if(!auth) return Promise.reject(createError(400, 'bad request'));
+  if(!auth) return Promise.reject(createError(400, 'GET lacking authorization. Bad request'));
 
   return User.findOne({email: auth.email})
 
@@ -32,14 +31,14 @@ exports.fetchUser = function(req, auth) {
 };
 
 exports.deleteUser = function(id) {
-  if(!id) return Promise.reject(createError(400, 'bad request'));
+  if(!id) return Promise.reject(createError(400, 'DELETE lacking ID. Bad request'));
 
   return User.findByIdAndRemove(id);
 };
 
 exports.updateUser = function(id, update) {
-  if(!id) return Promise.reject(createError(400, 'bad request'));
-  if(!update) return Promise.reject(createError(400, 'bad request'));
+  if(!id) return Promise.reject(createError(400, 'PUT lacking ID. Bad request'));
+  if(!update) return Promise.reject(createError(400, 'PUT lacking body. Bad request'));
 
   return User.findByIdAndUpdate(id, update, {new: true});
 };
