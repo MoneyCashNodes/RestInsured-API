@@ -1,17 +1,19 @@
-![cf](https://i.imgur.com/7v5ASc8.png) Rest Insured
+# ![cf](https://i.imgur.com/7v5ASc8.png) Rest Insured
 
 [![Coverage Status](https://coveralls.io/repos/github/MoneyCashNodes/RestInsured-API/badge.svg?branch=master)](https://coveralls.io/github/MoneyCashNodes/RestInsured-API?branch=master)
 [![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
 
-======
-## Project Week May 2017
 Team Name: MoneyCacheNodes
-* JavaScript Team Members: Abigail White, Enrique Rico, Kayla Asay, Ben Ayzenberg
-* iOS Team Members: Brandon Little, Luay Younus, David Porter
+
+Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
+:----------------------------:|:----------------------------: | :------:| :------:
+[![Abigail White](image)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/luayyounus) | [![Enrique Rico](image)](https://github.com/EnriqueRico)[![Kayla Asay ](image)](https://github.com/thegrimheep)
 
 ## Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
+
+This app is intended for educational purposes only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
 ## Summary
 ### MVP
@@ -31,45 +33,56 @@ Team Name: MoneyCacheNodes
   * Insurance providers accepted (list)
   * Practice phone number
   * Specialty
-* Location
+  * Location
 
-### Stretch
+### Future Opportunities
 * Filter requests to api by “specialty”
 * Book appointments functionality
 * Calendar notifications of appointment
 * Unregistered user functionality to access query and map functionality
 
 ### Resources
-  * BetterDoctor api
-  * Mongo DB
+  * BetterDoctor API: Retrieve insurance information
+  * Mongo DataBase: Maintain user registration data
   * Heroku deployment
-  * Express
-  * Mongoose
+  * Express: Node.js Web Apps
+  * Mongoose: Manage asynchronous environment
   * JSON web token
-  * Bluebird
-  * Body parser
-  * Debug
-  * Cors
+  * Bluebird: Promise rendering
+  * Body parser: Middleware development
+  * Debug: Debugging code process
+  * Cors: Provides Express middleware
 
-* Developer only: mocha, chai, chai-http
+  * Developer only:
+      * Mocha: Testing
+      * Chai: Testing assertions
+      * Chai-http: Testing with local server environment
 
-#### Collaboration Tools
-  * GitHub Projects for daily TODOs
-  * Google Docs for larger overview, daily standups
+#### Team Collaboration Tools
+  * GitHub Projects/ Organization
+  * Google Docs for larger overview, daily stand-ups
   * Slack for basic communication
 _____
 ## API Endpoints
-Deployed endpoint: `rest-insured.herokuapp.com`
+Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 
 ### Create and Modify User
-1. Create Account: `rest-insured.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
-2. Fetch Account: `rest-insured.herokuapp.com/signin -a <email>:<password>`
-3. Update Account: `rest-insured.herokuapp.com/update/<user id> <key>:<changed value> 'Authorization:Bearer <token>'`
-4. Delete Account: `rest-insured.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
+1. Create Account: `https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+2. Fetch Account: `https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+3. Update Account: `https://rest-insured-production.herokuapp.com/update/<user id> <key>:<changed value> 'Authorization:Bearer <token>'`
+4. Delete Account: `https://rest-insured-production.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
+Utilize `http://api.betterdoctor.com` as basis for request endpoints.
+Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
+
+1. Fetch provider information based on Location and Insurance Provider input.
+
+API URL Request:
+`https://api.betterdoctor.com/${date}/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}`
 
 #### Sample JSON
+Example of data output from API request
 ```
 {
   "Providers": [
@@ -89,24 +102,6 @@ Deployed endpoint: `rest-insured.herokuapp.com`
           {
             "Doctor Name" : "Adam Scott",
             "Specialty" : "cardiologist"
-          }
-        ]
-      },
-      "Practice" : {
-        "Name" : "Bad Doctors",
-        "phone" : "2222222222",
-        "uid" : "1234uiid576854048",
-        "lat" : 47.622910,
-        "long" : -122.326841,
-        "state": "WA",
-        "state_long": "Washington",
-        "street": "821 Mount Rainier Hwy S",
-        "zip": "98116",
-        "accepts_new_patients": true,
-        "Doctors" : [
-          {
-            "Doctor Name" : "Steve Irwin",
-            "Specialty" : "proctologist"
           }
         ]
       }
