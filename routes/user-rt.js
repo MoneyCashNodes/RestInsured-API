@@ -4,6 +4,7 @@ const debug = require('debug')('restInsured:user-rt');
 const userCtlr = require('../controllers/user-ctrl');
 const basicAuth = require('../middleware/basic-auth');
 const bearerAuth = require('../middleware/bearer-auth');
+const createError = require('http-errors');
 
 module.exports = function(router) {
 
@@ -12,16 +13,14 @@ module.exports = function(router) {
 
     userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
-    .catch(err => res.status(err.status).send(err));
+    .catch(err => createError(400, err.message));
   });
 
   router.get('/signin', basicAuth, (req, res) => {
     debug('#GET /signin');
 
     userCtlr.fetchUser(req, req.auth)
-    .then(token => {
-      res.json(token);
-    })
+    .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));
   });
 
@@ -30,7 +29,7 @@ module.exports = function(router) {
 
     userCtlr.deleteUser(req.params.id)
     .then ( () => res.status(204).send())
-    .catch(err => res.status(err.status).send(err.message));
+    .catch(err => res.status(err.status).send(err));
   });
 
   router.put('/update/:id', bearerAuth, (req, res) => {
@@ -38,7 +37,7 @@ module.exports = function(router) {
 
     userCtlr.updateUser(req.params.id, req.body)
     .then( user => res.json(user))
-    .catch(err => res.status(err.status).send(err.message));
+    .catch(err => res.status(err.status).send(err));
   });
   return router;
 };

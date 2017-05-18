@@ -41,7 +41,7 @@ describe('User Routes Test', function() {
     .catch(() => done());
   });
 
-  describe('POST /api/signup', function() {
+  describe.only('POST /api/signup', function() {
     describe('succesful user POST', function () {
       before(done => {
         new User(exampleUser)
@@ -68,7 +68,6 @@ describe('User Routes Test', function() {
         request.post(`${url}/api/signup`)
         .send(exampleUser)
         .end((err, res) => {
-          console.log(err);
           if (err) return done(err);
           expect(res.status).to.be.equal(200);
           expect(res.text).to.be.a('string');
@@ -76,72 +75,70 @@ describe('User Routes Test', function() {
         });
       });
     });
-      it('should provide a 400 status code for invalid User POST', done => {
-        request.post(`${url}/api/signup`)
-        .end((err, res) => {
-          if (err) return done(err);
-          console.log(res.status);
-          expect(res.status).to.equal(400);
-          expect(res.statusCode).to.equal(400);
-          expect(res.statusType).to.equal(4);
-          done();
-        });
+    it('should provide a 400 status code for invalid User POST', done => {
+      request.post(`${url}/api/signup`)
+      .end((err, res) => {
+        if (err) return err;
+        console.log(res.status);
+        expect(res.status).to.equal(400);
+        expect(res.statusCode).to.equal(400);
+        expect(res.statusType).to.equal(4);
+        done();
       });
+    });
   });
 
 
   describe('GET Existing User Account', function() {
-    describe('with a valid body', function() {
-      before(done => {
-        new User(exampleUser)
-        .generatePasswordHash(exampleUser.password)
-        .then(user => user.save())
-        .then(user => {
-          this.tempUser = user;
-          return user.generateToken();
-        })
-        .then(token => {
-          this.tempToken = token;
-          done();
-        })
-        .catch(() => done());
-      });
+    before(done => {
+      new User(exampleUser)
+      .generatePasswordHash(exampleUser.password)
+      .then(user => user.save())
+      .then(user => {
+        this.tempUser = user;
+        return user.generateToken();
+      })
+      .then(token => {
+        this.tempToken = token;
+        done();
+      })
+      .catch(() => done());
+    });
 
-      after( done => {
-        User.remove({})
-        .then( () => done())
-        .catch(done);
-      });
+    after( done => {
+      User.remove({})
+      .then( () => done())
+      .catch(done);
+    });
 
-      it('should return a user', done => {
-        request.get(`${url}/api/signin/`)
-        .auth('exampleuser@test.com', '1234')
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.status).to.equal(200);
-          expect(res.statusCode).to.equal(200);
-          expect(res.statusType).to.equal(2);
-          expect(res.error).to.be.false;
-          expect(res.body).to.be.a('string');
-          done();
-        });
+    it('should return a user', done => {
+      request.get(`${url}/api/signin/`)
+      .auth('exampleuser@test.com', '1234')
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.statusCode).to.equal(200);
+        expect(res.statusType).to.equal(2);
+        expect(res.error).to.be.false;
+        expect(res.body).to.be.a('string');
+        done();
       });
+    });
 
-      it('invalid GET: should produce 404', done => {
-        request.get(`${url}/api/signin/${this.tempUser_id}`)
-        .auth('exampleuser@test.com', '123')
-        .end(res => {
-          expect(res.status).to.equal(404);
-          done();
-        });
+    it('invalid GET: should produce 404', done => {
+      request.get(`${url}/api/signin/${this.tempUser_id}`)
+      .auth('exampleuser@test.com', '123')
+      .end(res => {
+        expect(res.status).to.equal(404);
+        done();
       });
+    });
 
-      it('unauthorized GET: should produce 401', done => {
-        request.get(`${url}/api/signin`)
-        .end(res => {
-          expect(res.status).to.equal(401);
-          done();
-        });
+    it('unauthorized GET: should produce 401', done => {
+      request.get(`${url}/api/signin`)
+      .end(res => {
+        expect(res.status).to.equal(401);
+        done();
       });
     });
   });
