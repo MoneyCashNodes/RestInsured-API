@@ -74,15 +74,25 @@ _____
 ## API Endpoints
 Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 
+### Install Node Packages
+1. First, `npm i` to download all resources onto the local machine.
+2. In terminal, run files using `nodemon server`.
+3. In a separate terminal tab, enter the following:
+
 ### Create and Modify User
+Enter into terminal window:
 1. Create Account:
-  * `https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+  * Template: `http POST https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+  * Example: `http POST https://rest-insured-production.herokuapp.com/api/signin fullName=abigail email=abs@white.com password=1234 insurance=aetna`
 2. Fetch Account:
-  * `https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+  * Template: `http GET https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+  * Example: `http GET https://rest-insured-production.herokuapp.com/api/signin -a abswhite:1234`
 3. Update Account:
-  * `https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
+  * Template: `http PUT https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
+  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
 4. Delete Account:  
-  * `https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
+  * Template: `http DELETE https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
+  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857`
 
 ### Doctor and Practice Retrieval
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
