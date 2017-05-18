@@ -51,7 +51,7 @@ This app is intended for educational purposes only. This project does not mainta
 * [BetterDoctor API](https://developer.betterdoctor.com/): Retrieve insurance information
 * [Mongo DataBase](https://www.mongodb.com/): Maintain user registration data
 * [Heroku](https://www.heroku.com): Deployment (Staging and Production Environments)
-* [Express](https://expressjs.com/): Middleware
+* [Express](https://expressjs.com/): Middleware functionality
 * [Mongoose](http://mongoosejs.com/): Manage asynchronous environment
 * [JSON Web Token](https://jwt.io/introduction/): Secure data transmission
 * [Bluebird](https://www.npmjs.com/package/bluebird): Promise rendering
@@ -60,6 +60,9 @@ This app is intended for educational purposes only. This project does not mainta
 * [Cors](https://www.npmjs.com/package/cors): Provides Express middleware
 * [Error Handler](https://www.npmjs.com/package/error-handler): Create error status
 * [Multer](https://www.npmjs.com/package/multer): Handle middleware form data
+* [Bcrypt](https://www.npmjs.com/package/bcrypt): Utilized in password hashing processes
+* [Request](https://www.npmjs.com/package/request): Utilized in making http calls
+* [Request-Promise](https://www.npmjs.com/package/request-promise): Utilize Request and Bluebird in making http calls
 
 * Developer only:
   * [Mocha](https://www.npmjs.com/package/mocha): Testing
