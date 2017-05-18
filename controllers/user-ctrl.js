@@ -7,6 +7,7 @@ const User = require('../model/user');
 module.exports = exports = {};
 
 exports.createUser = function(req, user) {
+
   if(!user) Promise.reject(createError(400, 'POST bad Request'));
 
   let tempPassword = user.password;
