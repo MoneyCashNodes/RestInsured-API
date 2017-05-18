@@ -9,7 +9,6 @@ module.exports = function(router) {
 
   router.post('/signup', (req, res) => {
     debug('#POST /signup');
-
     userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
     .catch(err => res.status(err.status).send(err));

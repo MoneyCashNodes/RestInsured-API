@@ -2,6 +2,7 @@
 
 const debug = require('debug')('restInsured: doctor-rt');
 const bearerAuth = require('../middleware/bearer-auth');
+
 const rp = require('request-promise');
 const doctorCtrl = require('../controllers/doctor-ctrl.js');
 const createError = require('http-errors');
@@ -24,6 +25,7 @@ module.exports = function(router) {
     rp(reqUrl)
     .then(data => doctorCtrl.reduce(JSON.parse(data)))
     .then(body => res.json(body))
+
     .catch(err => res.status(err.status).send(err.message));
   });
   return router;

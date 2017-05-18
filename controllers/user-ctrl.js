@@ -7,8 +7,8 @@ const User = require('../model/user');
 module.exports = exports = {};
 
 exports.createUser = function(req, user) {
-
-  if(!user) return Promise.reject(createError(400, 'Bad Request'));
+console.log('in createUser', user)
+  if(!user.email) Promise.reject(createError(400, 'Bad Request'));
 
   let tempPassword = user.password;
   user.password = null;
