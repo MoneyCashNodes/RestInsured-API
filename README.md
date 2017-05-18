@@ -66,7 +66,7 @@ This app is intended for educational purposes only. This project does not mainta
   * Chai: Testing assertions
   * Chai-http: Testing with local server environment
 
-#### Team Collaboration Tools
+### Team Collaboration Tools
   * GitHub Projects/ Organization
   * Google Docs for larger overview, daily stand-ups
   * Slack for basic communication
