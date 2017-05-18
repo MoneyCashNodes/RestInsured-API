@@ -7,7 +7,7 @@ Team Name: MoneyCacheNodes
 
 Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](image)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](image)](https://github.com/EnriqueRico)|[![Kayla Asay ](image)](https://github.com/thegrimheep)
+[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/thegrimheep)
 
 ## Project Concept:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
