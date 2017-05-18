@@ -19,7 +19,7 @@ exports.createUser = function(req, user) {
   return newUser.generatePasswordHash(tempPassword)
   .then(user => user.save())
   .then(user => user.generateToken())
-  .catch(err => createError(400, 'POST bad request'));
+  .catch(err => createError(err.status, 'POST bad request'));
 };
 
 exports.fetchUser = function(req, auth) {

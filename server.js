@@ -4,7 +4,6 @@ require('dotenv').load();
 
 const express = require('express');
 const cors = require('cors');
-const debug = require('debug')('restInsured:server');
 const Promise = require('bluebird');
 const bodyParser = require('body-parser').json();
 const mongoose = require('mongoose');

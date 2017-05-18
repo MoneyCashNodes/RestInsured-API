@@ -12,7 +12,7 @@ module.exports = function(router) {
     debug('#POST /signup');
     userCtlr.createUser(req, req.body)
     .then(token => res.json(token))
-    .catch(err => createError(400, 'POST bad request'));
+    .catch(() => createError(400, 'POST bad request'));
   });
 
   router.get('/signin', basicAuth, (req, res) => {
