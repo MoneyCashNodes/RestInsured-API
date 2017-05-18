@@ -74,6 +74,8 @@ _____
 ## API Endpoints
 Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 
+Note: Application requests will be unsuccessful without essential environment variables.
+
 ### Install Node Packages
 1. First, `npm i` to download all resources onto the local machine.
 2. In terminal, run files using `nodemon server`.
