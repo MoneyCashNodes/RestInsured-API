@@ -48,23 +48,23 @@ This app is intended for educational purposes only. This project does not mainta
 * Unregistered user functionality to access query and map functionality
 
 ### Resources
-  * BetterDoctor API: Retrieve insurance information
-  * Mongo DataBase: Maintain user registration data
-  * Heroku deployment (Staging and Production Environments)
-  * Express: Middleware
-  * Mongoose: Manage asynchronous environment
-  * JSON web token
-  * Bluebird: Promise rendering
-  * Body parser: Middleware development
-  * Debug: Debugging code process
-  * Cors: Provides Express middleware
-  * Error Handler: Create error status
-  * Multer: Handle middleware form data
+* BetterDoctor API: Retrieve insurance information
+* Mongo DataBase: Maintain user registration data
+* Heroku deployment (Staging and Production Environments)
+* Express: Middleware
+* Mongoose: Manage asynchronous environment
+* JSON web token
+* Bluebird: Promise rendering
+* Body parser: Middleware development
+* Debug: Debugging code process
+* Cors: Provides Express middleware
+* Error Handler: Create error status
+* Multer: Handle middleware form data
 
-  * Developer only:
-      * Mocha: Testing
-      * Chai: Testing assertions
-      * Chai-http: Testing with local server environment
+* Developer only:
+  * Mocha: Testing
+  * Chai: Testing assertions
+  * Chai-http: Testing with local server environment
 
 #### Team Collaboration Tools
   * GitHub Projects/ Organization
@@ -75,20 +75,25 @@ _____
 Deployed endpoint: `https://rest-insured-production.herokuapp.com`
 
 ### Create and Modify User
-1. Create Account: `https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
-2. Fetch Account: `https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
-3. Update Account: `https://rest-insured-production.herokuapp.com/update/<user id> <key>:<changed value> 'Authorization:Bearer <token>'`
-4. Delete Account: `https://rest-insured-production.herokuapp.com/delete/<user id> 'Authorization:Bearer <token>'`
+1. Create Account:
+  * `https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
+2. Fetch Account:
+  * `https://rest-insured-production.herokuapp.com/signin -a <email>:<password>`
+3. Update Account:
+  * `https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
+4. Delete Account:  
+  * `https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
-* Utilize `http://api.betterdoctor.com` as basis for request endpoints.
-
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
+* Utilize `http://api.betterdoctor.com` as basis for request endpoints.
 
 Fetch provider information based on Location and Insurance Provider input.
 
 API URL Request:
-`https://api.betterdoctor.com/${date}/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}`
+```
+https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key};
+```
 
 #### Sample JSON Data Output
 Example of data output from API request
