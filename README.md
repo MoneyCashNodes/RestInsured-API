@@ -87,6 +87,8 @@ Note: Application requests will be unsuccessful without essential environment va
 2. In terminal, run files using `nodemon server`.
 
 ### Create and Modify User
+**Objective:** Create, retrieve, modify, and delete user account info from MongoDB.
+
 Enter into terminal window:
 1. Create Account:
   * Template: `http POST https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
@@ -102,10 +104,11 @@ Enter into terminal window:
   * Example: `http DELETE https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
+**Objective:** Fetch provider information based on Location and Insurance Provider input.
+
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
 * Utilize `http://api.betterdoctor.com` as basis for request endpoints.
 
-Fetch provider information based on Location and Insurance Provider input.
 
 API URL Request Retrieved from External API:
 ```
