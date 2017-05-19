@@ -76,9 +76,8 @@ describe('BetterDoc route', function() {
       expect(this.res.body[0].phone).to.be.a('String');
     });
 
-    it('should be an array of 5 objects', () => {
+    it('should be an array of objects', () => {
       expect(this.res.body).to.be.an('Array');
-      expect(this.res.body).length(5);
       expect(this.res.body[0]).to.be.an('Object');
       expect(this.res.body[0].doctor).to.be.an('Object');
     });
