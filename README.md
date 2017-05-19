@@ -14,15 +14,15 @@ Team Name: MoneyCacheNodes
 
 This app is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
-## App Functionality:
+### Application Functionality
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-## Structure
+### Structure
 * This app was structured using MVC (Model-View-Controller) architecture.
 * This project is deployed on Heroku using staging and production environments.
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
-
+-------
 ## Summary
 ### MVP
 * Registered user takes in full name, email, location, provider, password info
