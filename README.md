@@ -3,24 +3,27 @@
 [![Coverage Status](https://coveralls.io/repos/github/MoneyCashNodes/RestInsured-API/badge.svg)](https://coveralls.io/github/MoneyCashNodes/RestInsured-API)
 [![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
 
-Team Name: MoneyCacheNodes
+Organization Name: MoneyCacheNodes
 
-Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
+[Abigail White](https://github.com/abswhite) | [Ben Ayzenberg](https://github.com/BAyzenberg) | [Enrique Rico](https://github.com/EnriqueRico) | [Kayla Asay](https://github.com/Kdasay16)
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/thegrimheep)
+[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](/assets/ben.jpg)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/Kdasay16)
 
-## Project Concept:
+## Application Summary
+"Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the back-end code for the application, created using JavaScript and Node.js.
+
+This application is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
+
+### Back-End Functionality
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-This app is intended for educational purposes only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
-
-## Structure
+### Back-End Structure
 * This app was structured using MVC (Model-View-Controller) architecture.
 * This project is deployed on Heroku using staging and production environments.
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
-
-## Summary
+-------
+## Overview
 ### MVP
 * Registered user takes in full name, email, location, provider, password info
   * Password hashed so the password is never stored in plain text
@@ -84,6 +87,8 @@ Note: Application requests will be unsuccessful without essential environment va
 2. In terminal, run files using `nodemon server`.
 
 ### Create and Modify User
+**Objective:** Create, retrieve, modify, and delete user account info from MongoDB.
+
 Enter into terminal window:
 1. Create Account:
   * Template: `http POST https://rest-insured-production.herokuapp.com/signup <fullName>=<input> <email>=<input> <password>=<input> <insurance>=<input>`
@@ -93,20 +98,25 @@ Enter into terminal window:
   * Example: `http GET https://rest-insured-production.herokuapp.com/api/signin -a abswhite:1234`
 3. Update Account:
   * Template: `http PUT https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
-  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
+  * Example: `http PUT https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
 4. Delete Account:  
   * Template: `http DELETE https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
-  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
+  * Example: `http DELETE https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
+**Objective:** Fetch provider information based on Location and Insurance Provider input.
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
 * Utilize `http://api.betterdoctor.com` as basis for request endpoints.
 
-Fetch provider information based on Location and Insurance Provider input.
 
-API URL Request:
+1. API URL Request Retrieved from External API:
 ```
-https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key};
+http GET https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}
+```
+
+2. API URL Sent to iOS Front-End (example):
+```
+http GET https://rest-insured-staging.herokuapp.com/ext/doctors?lat=47.606&lon=-122.332&range=10&insurance=regenceblueshieldofwashinton-regencewapreferredprovidernetwork 'Authorization:Bearer <token>'
 ```
 
 #### Sample JSON Data Output
@@ -143,4 +153,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Acknowledgments
 
-Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley, and Erica Winberry for guidance and assistance throughout the project.
+Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley, Erica Winberry, and many others for guidance and assistance throughout the project.
