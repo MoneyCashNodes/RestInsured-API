@@ -3,28 +3,28 @@
 [![Coverage Status](https://coveralls.io/repos/github/MoneyCashNodes/RestInsured-API/badge.svg)](https://coveralls.io/github/MoneyCashNodes/RestInsured-API)
 [![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
 
-Organization Name: MoneyCacheNodes
+## MoneyCacheNodes Team
 
 [Abigail White](https://github.com/abswhite) | [Ben Ayzenberg](https://github.com/BAyzenberg) | [Enrique Rico](https://github.com/EnriqueRico) | [Kayla Asay](https://github.com/Kdasay16)
 :----------------------------:|:----------------------------: | :------:| :------:
 [![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](/assets/ben.jpg)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/Kdasay16)
 
 ## Application Summary
-"Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the back-end code for the application, created using JavaScript and Node.js.
+"Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development can be accessed in the [Rest Insured repository](https://github.com/MoneyCashNodes/RestInsured). This current repository provides the back-end code for the application, created using JavaScript and Node.js.
 
 This application is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
-### Back-End Functionality
+### Functionality
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-### Back-End Structure
+### Structure and Resources
 * This app was structured using MVC (Model-View-Controller) architecture.
 * This project is deployed on Heroku using staging and production environments.
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
--------
+_____
 ## Overview
-### MVP
+### Minimum Viable Product
 * Registered user takes in full name, email, location, provider, password info
   * Password hashed so the password is never stored in plain text
 * Input of provider info and location
@@ -52,6 +52,7 @@ This application is intended for **educational purposes** only. This project doe
 
 ### Resources
 * [BetterDoctor API](https://developer.betterdoctor.com/): Retrieve insurance information
+* [Node.js](https://nodejs.org/en/): Server-side JavaScript environment
 * [Mongo DataBase](https://www.mongodb.com/): Maintain user registration data
 * [Heroku](https://www.heroku.com): Deployment (Staging and Production Environments)
 * [Express](https://expressjs.com/): Middleware functionality
@@ -68,7 +69,7 @@ This application is intended for **educational purposes** only. This project doe
 * [Request-Promise](https://www.npmjs.com/package/request-promise): Utilize Request and Bluebird in making http calls
 
 * Developer only:
-  * [Mocha](https://www.npmjs.com/package/mocha): Testing
+  * [Mocha](https://www.npmjs.com/package/mocha): Testing framework
   * [Chai](https://www.npmjs.com/package/chai): Testing assertions
   * [Chai-http](http://chaijs.com/): Testing with local server environment
 
