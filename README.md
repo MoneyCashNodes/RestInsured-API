@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/MoneyCashNodes/RestInsured-API/badge.svg)](https://coveralls.io/github/MoneyCashNodes/RestInsured-API)
 [![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
 
-Organization Name: MoneyCacheNodes
+## MoneyCacheNodes Team
 
 [Abigail White](https://github.com/abswhite) | [Ben Ayzenberg](https://github.com/BAyzenberg) | [Enrique Rico](https://github.com/EnriqueRico) | [Kayla Asay](https://github.com/Kdasay16)
 :----------------------------:|:----------------------------: | :------:| :------:
