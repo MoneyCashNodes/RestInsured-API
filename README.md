@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/MoneyCashNodes/RestInsured-API/badge.svg)](https://coveralls.io/github/MoneyCashNodes/RestInsured-API)
 [![Build Status](https://travis-ci.org/MoneyCashNodes/RestInsured-API.svg?branch=master)](https://travis-ci.org/MoneyCashNodes/RestInsured-API)
 
-Team Name: MoneyCacheNodes
+Organization Name: MoneyCacheNodes
 
 [Abigail White](https://github.com/abswhite) | [Ben Ayzenberg](https://github.com/BAyzenberg) | [Enrique Rico](https://github.com/EnriqueRico) | [Kayla Asay](https://github.com/Kdasay16)
 :----------------------------:|:----------------------------: | :------:| :------:
@@ -12,7 +12,7 @@ Team Name: MoneyCacheNodes
 ## Application Overview
 "Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the back-end code for the application, created using JavaScript and Node.js.
 
-This app is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
+This application is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
 ### Back-End Functionality
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
@@ -105,17 +105,16 @@ Enter into terminal window:
 
 ### Doctor and Practice Retrieval
 **Objective:** Fetch provider information based on Location and Insurance Provider input.
-
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
 * Utilize `http://api.betterdoctor.com` as basis for request endpoints.
 
 
-API URL Request Retrieved from External API:
+1. API URL Request Retrieved from External API:
 ```
 http GET https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}
 ```
 
-API URL Sent to iOS Front-End (example):
+2. API URL Sent to iOS Front-End (example):
 ```
 http GET https://rest-insured-staging.herokuapp.com/ext/doctors?lat=47.606&lon=-122.332&range=10&insurance=regenceblueshieldofwashinton-regencewapreferredprovidernetwork 'Authorization:Bearer <token>'
 ```
@@ -154,4 +153,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Acknowledgments
 
-Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley, and Erica Winberry for guidance and assistance throughout the project.
+Thank you to Adam Wallraff, Scott Schmidt, Thomas Martinez, Devon Hackley, Erica Winberry, and many others for guidance and assistance throughout the project.
