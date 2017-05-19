@@ -5,15 +5,18 @@
 
 Team Name: MoneyCacheNodes
 
-Abigail White | Ben Ayzenberg | Enrique Rico | Kayla Asay
+[Abigail White](https://github.com/abswhite) | [Ben Ayzenberg](https://github.com/BAyzenberg) | [Enrique Rico](https://github.com/EnriqueRico) | [Kayla Asay](https://github.com/Kdasay16)
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/thegrimheep)
+[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/Kdasay16)
 
-## Project Concept:
+## About
+"Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the backend code for the application, created using JavaScript and Node.js.
+
+This app is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
+
+## App Functionality:
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
-
-This app is intended for educational purposes only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
 ## Structure
 * This app was structured using MVC (Model-View-Controller) architecture.
@@ -104,12 +107,12 @@ Enter into terminal window:
 
 Fetch provider information based on Location and Insurance Provider input.
 
-API URL Request Retrieved:
+API URL Request Retrieved from External API:
 ```
 http GET https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}
 ```
 
-API URL Sent to Front-End (example):
+API URL Sent to iOS Front-End (example):
 ```
 http GET https://rest-insured-staging.herokuapp.com/ext/doctors?lat=47.606&lon=-122.332&range=10&insurance=regenceblueshieldofwashinton-regencewapreferredprovidernetwork 'Authorization:Bearer <token>'
 ```
