@@ -9,16 +9,16 @@ Team Name: MoneyCacheNodes
 :----------------------------:|:----------------------------: | :------:| :------:
 [![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/Kdasay16)
 
-## About
-"Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the backend code for the application, created using JavaScript and Node.js.
+## Application Overview
+"Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the back-end code for the application, created using JavaScript and Node.js.
 
 This app is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
-### Application Functionality
+### Back-End Functionality
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-### Structure
+### Back-End Structure
 * This app was structured using MVC (Model-View-Controller) architecture.
 * This project is deployed on Heroku using staging and production environments.
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
