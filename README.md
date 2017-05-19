@@ -24,7 +24,7 @@ This application is intended for **educational purposes** only. This project doe
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
 _____
 ## Overview
-### MVP
+### Minimum Viable Product
 * Registered user takes in full name, email, location, provider, password info
   * Password hashed so the password is never stored in plain text
 * Input of provider info and location
