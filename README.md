@@ -93,10 +93,10 @@ Enter into terminal window:
   * Example: `http GET https://rest-insured-production.herokuapp.com/api/signin -a abswhite:1234`
 3. Update Account:
   * Template: `http PUT https://rest-insured-production.herokuapp.com/update/<user-id> <key>:<changed value> 'Authorization:Bearer <token>'`
-  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
+  * Example: `http PUT https://rest-insured-production.herokuapp.com/update/1093982398738957329857 <fullName>:<abbi> 'Authorization:Bearer <token>'`
 4. Delete Account:  
   * Template: `http DELETE https://rest-insured-production.herokuapp.com/delete/<user-id> 'Authorization:Bearer <token>'`
-  * Example: `https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
+  * Example: `http DELETE https://rest-insured-production.herokuapp.com/update/1093982398738957329857 'Authorization:Bearer <token>'`
 
 ### Doctor and Practice Retrieval
 * Further documentation found at [Better Doctor API:](https://developer.betterdoctor.com/documentation15)
@@ -104,9 +104,14 @@ Enter into terminal window:
 
 Fetch provider information based on Location and Insurance Provider input.
 
-API URL Request:
+API URL Request Retrieved:
 ```
-https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key};
+http GET https://api.betterdoctor.com/2016-03-01/doctors?insurance_uid=${req.query.insurance}&location=${req.query.lat}%2C${req.query.lon}%2C${req.query.range}&limit=5&user_key=${process.env.user_key}
+```
+
+API URL Sent to Front-End (example):
+```
+http GET https://rest-insured-staging.herokuapp.com/ext/doctors?lat=47.606&lon=-122.332&range=10&insurance=regenceblueshieldofwashinton-regencewapreferredprovidernetwork 'Authorization:Bearer <token>'
 ```
 
 #### Sample JSON Data Output
