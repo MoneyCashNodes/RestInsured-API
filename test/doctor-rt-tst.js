@@ -48,7 +48,7 @@ describe('BetterDoc route', function() {
 
   describe('GET request /ext/doctors', function() {
     before(done => {
-      request.get('localhost:8000/ext/doctors?lat=47.606&lon=-122.332&range=10&insurance=regenceblueshieldofwashinton-regencewapreferredprovidernetwork')
+      request.get('localhost:8000/ext/doctors?lat=47.606&lon=-122.332&range=10&insurance=regenceblueshieldofwashinton-regencewapreferredprovidernetwork&limit=6')
         .set({
           Authorization: `Bearer ${user}`,
         })
@@ -76,9 +76,9 @@ describe('BetterDoc route', function() {
       expect(this.res.body[0].phone).to.be.a('String');
     });
 
-    it('should be an array of 5 objects', () => {
+    it('should be an array of 6 objects', () => {
       expect(this.res.body).to.be.an('Array');
-      expect(this.res.body).length(5);
+      expect(this.res.body).length(6);
       expect(this.res.body[0]).to.be.an('Object');
       expect(this.res.body[0].doctor).to.be.an('Object');
     });
@@ -102,7 +102,7 @@ describe('BetterDoc route', function() {
 
     it('should return a 400 error on a bad request', () => {
       expect(this.res.status).to.equal(400);
-      expect(this.res.text).to.equal('Latitude, Longitude, Range, and Insurance_uid are required');
+      expect(this.res.text).to.equal('Latitude, Longitude, Range, Limit, and Insurance_uid are required');
     });
   });
 });
