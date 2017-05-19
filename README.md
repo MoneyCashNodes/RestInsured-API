@@ -7,9 +7,9 @@ Organization Name: MoneyCacheNodes
 
 [Abigail White](https://github.com/abswhite) | [Ben Ayzenberg](https://github.com/BAyzenberg) | [Enrique Rico](https://github.com/EnriqueRico) | [Kayla Asay](https://github.com/Kdasay16)
 :----------------------------:|:----------------------------: | :------:| :------:
-[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](image)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/Kdasay16)
+[![Abigail White](/assets/abigail.jpg)](https://github.com/abswhite) | [![Ben Ayzenberg](/assets/ben.jpg)](https://github.com/BAyzenberg) | [![Enrique Rico](/assets/enrique.jpg)](https://github.com/EnriqueRico)|[![Kayla Asay ](/assets/kayla.jpg)](https://github.com/Kdasay16)
 
-## Application Overview
+## Application Summary
 "Rest Insured" is an iOS app that connects users with health care facilities based on their preferred location and health insurance provider. The code for iOS front-end development for the app can be viewed in the [Rest Insured](https://github.com/MoneyCashNodes/RestInsured) repository. This current repository provides the back-end code for the application, created using JavaScript and Node.js.
 
 This application is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
@@ -23,7 +23,7 @@ This application is intended for **educational purposes** only. This project doe
 * This project is deployed on Heroku using staging and production environments.
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
 -------
-## Summary
+## Overview
 ### MVP
 * Registered user takes in full name, email, location, provider, password info
   * Password hashed so the password is never stored in plain text
