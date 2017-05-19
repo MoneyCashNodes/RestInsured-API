@@ -14,15 +14,15 @@ Organization Name: MoneyCacheNodes
 
 This application is intended for **educational purposes** only. This project does not maintain user medical records with respect to health care needs or preferences. This app does not persist records of previous health care appointments or illness.
 
-### Back-End Functionality
+### Functionality
 * Connect users with medical facilities that accept their insurance, based on user input of location and insurance provider.
 * Utilize registered user functionality to access app functionality
 
-### Back-End Structure
+### Structure and Resources
 * This app was structured using MVC (Model-View-Controller) architecture.
 * This project is deployed on Heroku using staging and production environments.
 * The primary resources utilized in this project are Node.js, Mongo DB, Mocha/ Chai, and Express Middleware.
--------
+_____
 ## Overview
 ### MVP
 * Registered user takes in full name, email, location, provider, password info
@@ -52,6 +52,7 @@ This application is intended for **educational purposes** only. This project doe
 
 ### Resources
 * [BetterDoctor API](https://developer.betterdoctor.com/): Retrieve insurance information
+* [Node.js](https://nodejs.org/en/): Server-side JavaScript environment
 * [Mongo DataBase](https://www.mongodb.com/): Maintain user registration data
 * [Heroku](https://www.heroku.com): Deployment (Staging and Production Environments)
 * [Express](https://expressjs.com/): Middleware functionality
@@ -68,7 +69,7 @@ This application is intended for **educational purposes** only. This project doe
 * [Request-Promise](https://www.npmjs.com/package/request-promise): Utilize Request and Bluebird in making http calls
 
 * Developer only:
-  * [Mocha](https://www.npmjs.com/package/mocha): Testing
+  * [Mocha](https://www.npmjs.com/package/mocha): Testing framework
   * [Chai](https://www.npmjs.com/package/chai): Testing assertions
   * [Chai-http](http://chaijs.com/): Testing with local server environment
 
